@@ -12,8 +12,8 @@ REPRT_LABELS = {
     "11014": "3분기",
 }
 
-# 분기보고서 → 반기 → 3분기 → 연간 순으로 최신 데이터를 우선 시도
-_REPRT_ORDER = ["11013", "11012", "11014", "11011"]
+# 연간 → 반기 → 1분기 → 3분기 순으로 시도 (안정적인 데이터 우선)
+_REPRT_ORDER = ["11011", "11012", "11013", "11014"]
 
 TARGET_ACCOUNTS = ["매출액", "영업이익", "법인세차감전순이익", "당기순이익"]
 
@@ -133,7 +133,7 @@ def _fetch_single_financial(
         "fs_div": fs_div,
     }
     try:
-        response = requests.get(url, params=params, timeout=20)
+        response = requests.get(url, params=params, timeout=8)
         response.raise_for_status()
         data = response.json()
     except requests.RequestException:
@@ -174,21 +174,31 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
         값이 없는 항목은 None으로 채워진다.
     """
     current_year = datetime.today().year
-    years_to_try = [str(current_year), str(current_year - 1)]
+    # (연도, 보고서코드) 조합을 우선순위 순으로 구성
+    # 전년도 연간/반기 → 당해 연간/반기/분기 순으로 시도 (안정적 데이터 우선)
+    candidates = [
+        (str(current_year - 1), "11011"),
+        (str(current_year - 1), "11012"),
+        (str(current_year - 1), "11013"),
+        (str(current_year - 1), "11014"),
+        (str(current_year), "11011"),
+        (str(current_year), "11012"),
+        (str(current_year), "11013"),
+        (str(current_year), "11014"),
+    ]
 
-    for bsns_year in years_to_try:
-        for reprt_code in _REPRT_ORDER:
-            items = None
-            # 연결재무제표 우선
-            for fs_div in ("CFS", "OFS"):
-                items = _fetch_single_financial(
-                    corp_code, api_key, bsns_year, reprt_code, fs_div
-                )
-                if items:
-                    break
+    for bsns_year, reprt_code in candidates:
+        items = None
+        # 연결재무제표 우선
+        for fs_div in ("CFS", "OFS"):
+            items = _fetch_single_financial(
+                corp_code, api_key, bsns_year, reprt_code, fs_div
+            )
+            if items:
+                break
 
-            if not items:
-                continue
+        if not items:
+            continue
 
             # 계정과목별로 당기/전기 금액 추출
             account_map: dict[str, dict] = {}
