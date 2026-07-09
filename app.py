@@ -85,6 +85,14 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 [data-testid="stSidebar"] .stButton button * {
   color: #002271 !important;
 }
+/* 사이드바 버튼 hover/active/focus 배경 — 연한 청색 */
+[data-testid="stSidebar"] .stButton button:hover,
+[data-testid="stSidebar"] .stButton button:active,
+[data-testid="stSidebar"] .stButton button:focus {
+  background-color: #b3c6f0 !important;
+  border-color: #7a9fe0 !important;
+  color: #002271 !important;
+}
 
 /* 헤더 */
 h1, h2, h3 { font-family: 'Hanken Grotesk', sans-serif !important; color: var(--primary) !important; }
