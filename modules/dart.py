@@ -178,18 +178,20 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
     month = today.month
 
     # 현재 월 기준으로 조회할 보고서 1개만 결정
-    if month < 4:
-        # 1~3월: 전년도 연간
+    if month in (3, 4):
+        # 3~4월: 전년도 연간
         candidates = [(str(current_year - 1), "11011")]
-    elif month < 7:
-        # 4~6월: 당해 1분기
+    elif month in (5, 6, 7):
+        # 5~7월: 당해 1분기
         candidates = [(str(current_year), "11013")]
-    elif month < 10:
-        # 7~9월: 당해 반기(2분기)
+    elif month in (8, 9, 10):
+        # 8~10월: 당해 반기(2분기)
         candidates = [(str(current_year), "11012")]
     else:
-        # 10~12월: 당해 3분기
-        candidates = [(str(current_year), "11014")]
+        # 11~12월, 1~2월: 당해 3분기
+        # 1~2월은 전년도 3분기 기준
+        year = current_year if month >= 11 else current_year - 1
+        candidates = [(str(year), "11014")]
 
     for bsns_year, reprt_code in candidates:
         items = None
