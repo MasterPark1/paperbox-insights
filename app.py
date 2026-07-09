@@ -824,7 +824,10 @@ elif page == "⚙️ 설정":
         st.warning("🔒 이 페이지는 관리자 전용입니다.")
         pw_input = st.text_input("관리자 비밀번호", type="password", key="admin_pw_input")
         if st.button("확인", key="btn_admin_login"):
-            admin_pw = config.get_secrets().get("admin_password", "")
+            try:
+                admin_pw = str(st.secrets.get("admin_password") or "")
+            except Exception:
+                admin_pw = ""
             if admin_pw and pw_input == admin_pw:
                 st.session_state.admin_authed = True
                 st.rerun()
