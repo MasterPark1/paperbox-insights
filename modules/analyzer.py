@@ -393,6 +393,16 @@ def generate_insight(
 
     context = "\n".join(ctx_parts)
 
+    # 라면 부문 비중 언급이 필요한 회사 목록
+    ramen_focus_companies = ["오뚜기", "농심"]
+    ramen_instruction = ""
+    if any(c in company_name for c in ramen_focus_companies):
+        ramen_instruction = (
+            f"\n\n특히 {company_name}의 전체 매출 중 라면 부문이 차지하는 비중과 "
+            "최근 라면 부문의 동향(신제품, 수출, 시장점유율 변화 등)을 "
+            "strategy 및 opportunities 항목에 반드시 언급하세요."
+        )
+
     user_prompt = (
         f"{context}\n"
         f"위 정보를 바탕으로 {company_name}에 대한 영업 전략 인사이트를 "
@@ -403,6 +413,7 @@ def generate_insight(
         "opportunities(기회 요인 문자열 리스트), "
         "strategy(대응 전략 2~3문장 문자열), "
         "priority(A/B/C 영업 우선순위 — A가 최우선)"
+        f"{ramen_instruction}"
     )
 
     try:
