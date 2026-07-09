@@ -17,6 +17,13 @@ _REPRT_ORDER = ["11011", "11012", "11013", "11014"]
 
 TARGET_ACCOUNTS = ["매출액", "영업이익", "법인세차감전순이익", "당기순이익"]
 
+# API 반환 계정명 → 표준 계정명 매핑 (띄어쓰기·괄호 표기 차이 처리)
+_ACCOUNT_ALIAS = {
+    "법인세차감전 순이익": "법인세차감전순이익",
+    "당기순이익(손실)": "당기순이익",
+    "당기순손실": "당기순이익",
+}
+
 
 # ---------------------------------------------------------------------------
 # Disclosures
@@ -210,6 +217,7 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
             account_map: dict[str, dict] = {}
             for row in items:
                 acnt_nm = row.get("account_nm", "").strip()
+                acnt_nm = _ACCOUNT_ALIAS.get(acnt_nm, acnt_nm)
                 if acnt_nm not in TARGET_ACCOUNTS:
                     continue
                 thstrm = _parse_amount(row.get("thstrm_amount", ""))
