@@ -213,36 +213,35 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
         if not items:
             continue
 
-            # 계정과목별로 당기/전기 금액 추출
-            account_map: dict[str, dict] = {}
-            for row in items:
-                acnt_nm = row.get("account_nm", "").strip()
-                acnt_nm = _ACCOUNT_ALIAS.get(acnt_nm, acnt_nm)
-                if acnt_nm not in TARGET_ACCOUNTS:
-                    continue
-                thstrm = _parse_amount(row.get("thstrm_amount", ""))
-                frmtrm = _parse_amount(row.get("frmtrm_amount", ""))
-                # 같은 계정이 여러 번 등장할 경우 첫 번째 값 사용
-                if acnt_nm not in account_map:
-                    account_map[acnt_nm] = {
-                        "current": thstrm,
-                        "previous": frmtrm,
-                    }
-
-            if not account_map:
+        # 계정과목별로 당기/전기 금액 추출
+        account_map: dict[str, dict] = {}
+        for row in items:
+            acnt_nm = row.get("account_nm", "").strip()
+            acnt_nm = _ACCOUNT_ALIAS.get(acnt_nm, acnt_nm)
+            if acnt_nm not in TARGET_ACCOUNTS:
                 continue
+            thstrm = _parse_amount(row.get("thstrm_amount", ""))
+            frmtrm = _parse_amount(row.get("frmtrm_amount", ""))
+            if acnt_nm not in account_map:
+                account_map[acnt_nm] = {
+                    "current": thstrm,
+                    "previous": frmtrm,
+                }
 
-            reprt_label = REPRT_LABELS.get(reprt_code, reprt_code)
-            period_str = f"{bsns_year}년 {reprt_label}"
+        if not account_map:
+            continue
 
-            result: dict = {
-                "period": period_str,
-                "reprt_code": reprt_code,
-            }
-            for acnt in TARGET_ACCOUNTS:
-                result[acnt] = account_map.get(acnt, {"current": None, "previous": None})
+        reprt_label = REPRT_LABELS.get(reprt_code, reprt_code)
+        period_str = f"{bsns_year}년 {reprt_label}"
 
-            return result
+        result: dict = {
+            "period": period_str,
+            "reprt_code": reprt_code,
+        }
+        for acnt in TARGET_ACCOUNTS:
+            result[acnt] = account_map.get(acnt, {"current": None, "previous": None})
+
+        return result
 
     return None
 
