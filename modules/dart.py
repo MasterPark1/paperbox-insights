@@ -312,36 +312,12 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
 def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
     """
     DART 사업보고서 XML에서 종속회사 오뚜기라면㈜의 요약 재무현황을 파싱한다.
+    fetch_ottogi_ramen_detail의 financials 부분만 반환하는 편의 함수.
     """
-    result = _fetch_ottogi_xml(api_key)
-    if not result:
-        return None
-    xml_content, period_year, _ = result
-
-    pattern = (
-        r"오뚜기라면[㈜\(주\)]</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"
-    )
-    m = re.search(pattern, xml_content)
-    if not m:
-        return None
-
-    def _to_int(s: str) -> int:
-        return int(s.replace(",", ""))
-
-    return {
-        "자산": _to_int(m.group(1)),
-        "부채": _to_int(m.group(2)),
-        "자본": _to_int(m.group(3)),
-        "매출액": _to_int(m.group(4)),
-        "분기순이익": _to_int(m.group(5)),
-        "단위": "천원",
-        "period": f"{period_year}년 연간",
-    }
+    detail = fetch_ottogi_ramen_detail(api_key)
+    if detail:
+        return detail.get("financials")
+    return None
 
 
 def fetch_ottogi_ramen_detail(api_key: str) -> dict | None:
@@ -350,97 +326,120 @@ def fetch_ottogi_ramen_detail(api_key: str) -> dict | None:
     1) 종속회사별 요약 재무현황 테이블 행
     2) 사업의 개요 중 오뚜기라면(주) 관련 설명 텍스트
     를 함께 반환한다.
-
-    Returns:
-        {
-            "financials": { 자산, 부채, 자본, 매출액, 분기순이익, 단위, period },
-            "overview_paragraphs": [ str, ... ],   # 오뚜기라면 관련 설명 단락 목록
-            "report_nm": str,
-            "period": str,
-        }
-        또는 None
     """
     result = _fetch_ottogi_xml(api_key)
     if not result:
         return None
     xml_content, period_year, report_nm = result
 
-    # ── 1. 재무현황 테이블 파싱 ──────────────────────────────
-    fin_pattern = (
-        r"오뚜기라면[㈜\(주\)]</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"
-        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"
-    )
-    fin_m = re.search(fin_pattern, xml_content)
-
     def _to_int(s: str) -> int:
         return int(s.replace(",", ""))
 
+    def _td_texts(tr_html: str) -> list[str]:
+        """TR 블록 안의 모든 TD 텍스트(태그 제거)를 순서대로 반환한다."""
+        tds = re.findall(r"<TD[^>]*>(.*?)</TD>", tr_html, re.DOTALL | re.IGNORECASE)
+        return [_strip_tags(td).strip() for td in tds]
+
+    # ── 1. 재무현황 테이블 파싱 ──────────────────────────────
+    # TR 블록 전체를 찾아서 '오뚜기라면' 포함 행을 처리
     financials = None
-    if fin_m:
+    tr_blocks = re.findall(r"<TR[^>]*>.*?</TR>", xml_content, re.DOTALL | re.IGNORECASE)
+    for tr in tr_blocks:
+        if "오뚜기라면" not in tr:
+            continue
+        cells = _td_texts(tr)
+        # 첫 셀: 회사명, 나머지 5셀: 자산/부채/자본/매출액/순이익 (숫자)
+        if len(cells) < 6:
+            continue
+        # 숫자 셀이 4개 이상 있어야 재무 테이블 행으로 인정
+        num_cells = [c for c in cells[1:] if re.fullmatch(r"[\d,\(\)\-]+", c.replace(" ", ""))]
+        if len(num_cells) < 4:
+            continue
+        # 괄호로 감싼 음수 처리: (23,779,145) → -23779145
+        def _parse_cell(s: str) -> int | None:
+            s = s.strip().replace(",", "")
+            if not s or s in ("-", "―", "—"):
+                return None
+            if s.startswith("(") and s.endswith(")"):
+                try:
+                    return -int(s[1:-1])
+                except ValueError:
+                    return None
+            try:
+                return int(s)
+            except ValueError:
+                return None
+
+        nums = [_parse_cell(c) for c in cells[1:6]]
+        if all(v is None for v in nums):
+            continue
         financials = {
-            "자산": _to_int(fin_m.group(1)),
-            "부채": _to_int(fin_m.group(2)),
-            "자본": _to_int(fin_m.group(3)),
-            "매출액": _to_int(fin_m.group(4)),
-            "분기순이익": _to_int(fin_m.group(5)),
+            "자산": nums[0] if len(nums) > 0 else None,
+            "부채": nums[1] if len(nums) > 1 else None,
+            "자본": nums[2] if len(nums) > 2 else None,
+            "매출액": nums[3] if len(nums) > 3 else None,
+            "분기순이익": nums[4] if len(nums) > 4 else None,
             "단위": "천원",
             "period": f"{period_year}년 연간",
         }
+        break
 
     # ── 2. 사업의 개요 오뚜기라면 설명 파싱 ─────────────────
-    # <P> 또는 <TD> 안에 "오뚜기라면"이 포함된 텍스트 단락을 수집
-    # 단, 숫자 위주(테이블 셀)는 제외하고 한글 설명문만 추출
     overview_paragraphs: list[str] = []
     seen: set[str] = set()
 
-    # 방법1: <P ...>...</P> 블록에서 오뚜기라면 포함 단락
+    def _is_descriptive(text: str) -> bool:
+        """단순 목록이 아니라 서술적 내용인지 판단한다."""
+        if len(text) < 30:
+            return False
+        # 한글 비율이 낮으면 제외 (숫자 테이블)
+        korean = len(re.findall(r"[가-힣]", text))
+        if korean < 15:
+            return False
+        # 콤마가 지나치게 많으면 종속회사 목록 나열 문장 → 제외
+        # 단, 문장이 충분히 길면 목록 포함이어도 허용
+        comma_count = text.count(",")
+        if comma_count > 6 and len(text) < 200:
+            return False
+        # "㈜" 또는 "(주)"가 3개 이상 연속 등장 → 회사 목록 나열 문장 제외
+        company_marks = len(re.findall(r"[㈜]|(\(주\))", text))
+        if company_marks >= 4 and len(text) < 300:
+            return False
+        return True
+
+    # <P> 블록 우선 탐색
     p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", xml_content, re.DOTALL | re.IGNORECASE)
     for block in p_blocks:
         if "오뚜기라면" not in block:
             continue
         text = _strip_tags(block).strip()
-        # 너무 짧거나(단순 회사명 언급), 숫자 위주 셀이면 제외
-        if len(text) < 20:
+        if not _is_descriptive(text):
             continue
-        # 한글 비율이 낮으면(숫자 테이블) 제외
-        korean_chars = len(re.findall(r"[가-힣]", text))
-        if korean_chars < 10:
-            continue
-        key = text[:60]
+        key = text[:80]
         if key not in seen:
             seen.add(key)
             overview_paragraphs.append(text)
 
-    # 방법2: P 태그가 없으면 SPAN·DIV 블록도 시도
+    # P 태그가 없으면 SPAN 블록 시도
     if not overview_paragraphs:
         span_blocks = re.findall(
-            r"<(?:SPAN|DIV|TD)[^>]*>(.*?)</(?:SPAN|DIV|TD)>",
+            r"<SPAN[^>]*>(.*?)</SPAN>",
             xml_content, re.DOTALL | re.IGNORECASE,
         )
         for block in span_blocks:
             if "오뚜기라면" not in block:
                 continue
             text = _strip_tags(block).strip()
-            if len(text) < 30:
+            if not _is_descriptive(text):
                 continue
-            korean_chars = len(re.findall(r"[가-힣]", text))
-            if korean_chars < 15:
-                continue
-            key = text[:60]
+            key = text[:80]
             if key not in seen:
                 seen.add(key)
                 overview_paragraphs.append(text)
 
-    # 최대 10개 단락으로 제한
-    overview_paragraphs = overview_paragraphs[:10]
-
     return {
         "financials": financials,
-        "overview_paragraphs": overview_paragraphs,
+        "overview_paragraphs": overview_paragraphs[:10],
         "report_nm": report_nm,
         "period": f"{period_year}년 연간",
     }

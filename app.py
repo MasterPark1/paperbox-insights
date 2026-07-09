@@ -240,12 +240,12 @@ if page == "📊 리포트 생성":
                 data["financials"] = dart.fetch_all_financials(
                     COMPANIES, secrets.get("dart_api_key", "")
                 )
-                data["ottogi_ramen"] = dart.fetch_ottogi_ramen_financials(
-                    secrets.get("dart_api_key", "")
-                )
                 data["ottogi_ramen_detail"] = dart.fetch_ottogi_ramen_detail(
                     secrets.get("dart_api_key", "")
                 )
+                # financials는 detail에서 참조 (별도 다운로드 없음)
+                detail_fin = data["ottogi_ramen_detail"]
+                data["ottogi_ramen"] = detail_fin.get("financials") if detail_fin else None
             st.session_state.gen_step = 2
             render_steps(2)
 
