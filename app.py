@@ -80,6 +80,12 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
   background: #e8f5e9 !important;
 }
 
+/* 사이드바 버튼 글자색 — 진한 청색 */
+[data-testid="stSidebar"] .stButton button,
+[data-testid="stSidebar"] .stButton button * {
+  color: #002271 !important;
+}
+
 /* 헤더 */
 h1, h2, h3 { font-family: 'Hanken Grotesk', sans-serif !important; color: var(--primary) !important; }
 
