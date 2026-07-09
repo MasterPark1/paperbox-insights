@@ -240,10 +240,15 @@ if page == "📊 리포트 생성":
                 data["financials"] = dart.fetch_all_financials(
                     COMPANIES, secrets.get("dart_api_key", "")
                 )
+                # 오뚜기 본사 재무와 동일한 bsns_year/reprt_code로 오뚜기라면 XML 조회
+                ottogi_fin = data["financials"].get("오뚜기")
+                ottogi_bsns_year = ottogi_fin.get("bsns_year") if ottogi_fin else None
+                ottogi_reprt_code = ottogi_fin.get("reprt_code") if ottogi_fin else None
                 data["ottogi_ramen_detail"] = dart.fetch_ottogi_ramen_detail(
-                    secrets.get("dart_api_key", "")
+                    secrets.get("dart_api_key", ""),
+                    bsns_year=ottogi_bsns_year,
+                    reprt_code=ottogi_reprt_code,
                 )
-                # financials는 detail에서 참조 (별도 다운로드 없음)
                 detail_fin = data["ottogi_ramen_detail"]
                 data["ottogi_ramen"] = detail_fin.get("financials") if detail_fin else None
             st.session_state.gen_step = 2
@@ -357,22 +362,6 @@ if page == "📊 리포트 생성":
                     fig.update_xaxes(showgrid=False)
                     fig.update_yaxes(gridcolor="#f0f0f0")
                     st.plotly_chart(fig, use_container_width=True)
-
-                # 오뚜기라면㈜ 종속회사 재무현황
-                ramen = data.get("ottogi_ramen")
-                if ramen:
-                    st.markdown("##### 오뚜기라면㈜ 종속회사 요약재무")
-                    unit = ramen.get("단위", "천원")
-                    period = ramen.get("period", "")
-                    st.caption(f"{period} / 단위: {unit}")
-                    rcol1, rcol2, rcol3, rcol4, rcol5 = st.columns(5)
-                    def _mn(v):
-                        return f"{v // 1_000:,}백만원" if v is not None else "N/A"
-                    rcol1.metric("자산", _mn(ramen.get("자산")))
-                    rcol2.metric("부채", _mn(ramen.get("부채")))
-                    rcol3.metric("자본", _mn(ramen.get("자본")))
-                    rcol4.metric("매출액", _mn(ramen.get("매출액")))
-                    rcol5.metric("순이익", _mn(ramen.get("분기순이익")))
 
                 if data.get("financial_comment"):
                     st.info(f"💬 AI 종합 코멘트: {data['financial_comment']}")

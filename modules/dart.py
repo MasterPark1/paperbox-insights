@@ -240,6 +240,7 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
         result: dict = {
             "period": period_str,
             "reprt_code": reprt_code,
+            "bsns_year": bsns_year,
         }
         for acnt in TARGET_ACCOUNTS:
             result[acnt] = account_map.get(acnt, {"current": None, "previous": None})
@@ -260,22 +261,51 @@ def _strip_tags(html: str) -> str:
     return text.strip()
 
 
-def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
-    """오뚜기 최신 정기공시 XML과 기간 정보를 반환한다. (xml_content, period_year, report_nm)"""
+def _fetch_ottogi_xml(
+    api_key: str,
+    bsns_year: str | None = None,
+    reprt_code: str | None = None,
+) -> tuple[str, str, str] | None:
+    """
+    오뚜기 정기공시 XML과 기간 정보를 반환한다. (xml_content, period_year, report_nm)
+    bsns_year + reprt_code가 주어지면 해당 보고서와 일치하는 XML을 검색한다.
+    """
     OTTOGI_CORP_CODE = "00141529"
     today = datetime.today()
+
+    # reprt_code → DART 목록 조회용 파라미터 매핑
+    REPRT_TO_DETAIL_TY = {
+        "11011": "A001",  # 사업보고서
+        "11012": "A002",  # 반기보고서
+        "11013": "A003",  # 분기보고서 (1분기)
+        "11014": "A003",  # 분기보고서 (3분기)
+    }
+
+    params: dict = {
+        "crtfc_key": api_key,
+        "corp_code": OTTOGI_CORP_CODE,
+        "page_count": 10,
+    }
+
+    if bsns_year and reprt_code:
+        detail_ty = REPRT_TO_DETAIL_TY.get(reprt_code, "A001")
+        # 사업보고서는 bsns_year 다음 해 3~4월에 공시되므로 범위 확장
+        if reprt_code == "11011":
+            params["bgn_de"] = f"{bsns_year}0101"
+            params["end_de"] = f"{int(bsns_year) + 1}1231"
+        else:
+            params["bgn_de"] = f"{bsns_year}0101"
+            params["end_de"] = f"{bsns_year}1231"
+        params["pblntf_detail_ty"] = detail_ty
+    else:
+        params["bgn_de"] = f"{today.year - 1}0101"
+        params["end_de"] = today.strftime("%Y%m%d")
+        params["pblntf_ty"] = "A"
 
     try:
         resp = requests.get(
             "https://opendart.fss.or.kr/api/list.json",
-            params={
-                "crtfc_key": api_key,
-                "corp_code": OTTOGI_CORP_CODE,
-                "bgn_de": f"{today.year - 1}0101",
-                "end_de": today.strftime("%Y%m%d"),
-                "pblntf_ty": "A",   # 정기공시 전체 (사업/반기/분기 보고서 포함)
-                "page_count": 10,
-            },
+            params=params,
             timeout=10,
         )
         resp.raise_for_status()
@@ -283,7 +313,6 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
     except Exception:
         return None
 
-    # 사업보고서, 반기보고서, 분기보고서 중 가장 최신 선택
     TARGET_REPORTS = ("사업보고서", "반기보고서", "분기보고서")
     relevant = [f for f in filings if any(t in f.get("report_nm", "") for t in TARGET_REPORTS)]
     if not relevant:
@@ -293,7 +322,7 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
     rcept_no = filing.get("rcept_no", "")
     rcept_dt = filing.get("rcept_dt", "")
     report_nm = filing.get("report_nm", "보고서")
-    period_year = rcept_dt[:4] if rcept_dt else str(today.year - 1)
+    period_year = bsns_year if bsns_year else (rcept_dt[:4] if rcept_dt else str(today.year - 1))
 
     try:
         zip_resp = requests.get(
@@ -306,7 +335,6 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
         xml_files = [f for f in zf.namelist() if f.endswith(".xml")]
         if not xml_files:
             return None
-        # rcept_no를 파일명에 포함한 XML 우선 선택
         main_xml = next((f for f in xml_files if rcept_no in f), xml_files[0])
         xml_content = zf.read(main_xml).decode("utf-8", errors="ignore")
     except Exception:
@@ -315,25 +343,31 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
     return xml_content, period_year, report_nm
 
 
-def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
-    """
-    DART 사업보고서 XML에서 종속회사 오뚜기라면㈜의 요약 재무현황을 파싱한다.
-    fetch_ottogi_ramen_detail의 financials 부분만 반환하는 편의 함수.
-    """
-    detail = fetch_ottogi_ramen_detail(api_key)
+def fetch_ottogi_ramen_financials(
+    api_key: str,
+    bsns_year: str | None = None,
+    reprt_code: str | None = None,
+) -> dict | None:
+    """종속회사 오뚜기라면㈜ 요약 재무현황만 반환하는 편의 함수."""
+    detail = fetch_ottogi_ramen_detail(api_key, bsns_year=bsns_year, reprt_code=reprt_code)
     if detail:
         return detail.get("financials")
     return None
 
 
-def fetch_ottogi_ramen_detail(api_key: str) -> dict | None:
+def fetch_ottogi_ramen_detail(
+    api_key: str,
+    bsns_year: str | None = None,
+    reprt_code: str | None = None,
+) -> dict | None:
     """
-    DART 사업보고서 XML에서 오뚜기라면㈜ 관련
+    DART 보고서 XML에서 오뚜기라면㈜ 관련
     1) 종속회사별 요약 재무현황 테이블 행
     2) 사업의 개요 중 오뚜기라면(주) 관련 설명 텍스트
     를 함께 반환한다.
+    bsns_year + reprt_code를 주면 오뚜기 본사 재무 데이터와 동일한 보고서를 사용한다.
     """
-    result = _fetch_ottogi_xml(api_key)
+    result = _fetch_ottogi_xml(api_key, bsns_year=bsns_year, reprt_code=reprt_code)
     if not result:
         return None
     xml_content, period_year, report_nm = result
