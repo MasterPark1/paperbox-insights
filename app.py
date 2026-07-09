@@ -544,7 +544,7 @@ elif page == "👥 수신자 관리":
             h.markdown(f"**{t}**")
         st.markdown("<hr style='margin:4px 0'>", unsafe_allow_html=True)
 
-        for r in recipients:
+        for idx, r in enumerate(recipients):
             col1, col2, col3, col4, col5 = st.columns([2, 3, 2, 1, 1])
             col1.write(r.get("name", ""))
             col2.write(r.get("email", ""))
@@ -552,10 +552,10 @@ elif page == "👥 수신자 관리":
             is_active = r.get("active", True)
             badge = '<span class="badge badge-ok">활성</span>' if is_active else '<span class="badge badge-neu">비활성</span>'
             col4.markdown(badge, unsafe_allow_html=True)
-            if col5.button("🗑", key=f"del_{r['email']}", help=f"{r['email']} 삭제"):
+            if col5.button("🗑", key=f"del_{idx}_{r['email']}", help=f"{r['email']} 삭제"):
                 config.delete_recipient(r["email"])
                 st.rerun()
-            if col4.button("전환", key=f"tog_{r['email']}", help="활성/비활성 전환"):
+            if col4.button("전환", key=f"tog_{idx}_{r['email']}", help="활성/비활성 전환"):
                 config.toggle_recipient(r["email"])
                 st.rerun()
 
