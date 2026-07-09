@@ -312,8 +312,8 @@ if page == "📊 리포트 생성":
 
         if st.session_state.report_data:
             data = st.session_state.report_data
-            tab_fin, tab_fin2, tab_news, tab_disc, tab_ins = st.tabs(
-                ["📈 재무분석", "📈 재무분석2", "📰 뉴스", "📋 공시", "💡 인사이트"]
+            tab_fin, tab_news, tab_disc, tab_ins, tab_ramen = st.tabs(
+                ["📈 재무분석", "📰 뉴스", "📋 공시", "💡 인사이트", "🍜 오뚜기라면"]
             )
 
             # ── 재무분석 탭 ──
@@ -368,8 +368,8 @@ if page == "📊 리포트 생성":
                 else:
                     st.info("재무 데이터가 없습니다.")
 
-            # ── 재무분석2 탭 (오뚜기라면㈜ 전용) ──
-            with tab_fin2:
+            # ── 오뚜기라면 탭 ──
+            with tab_ramen:
                 st.markdown(
                     "<h3 style='color:#002271;margin-bottom:4px;'>"
                     "오뚜기라면 별도 분기(반기)(년) 분석</h3>",
@@ -440,6 +440,44 @@ if page == "📊 리포트 생성":
                             )
                     else:
                         st.info("사업의 개요에서 오뚜기라면㈜ 관련 설명을 찾지 못했습니다.")
+
+                    st.markdown("---")
+
+                    # ── 섹션 3: 오뚜기라면 관련 뉴스 ──
+                    st.markdown("#### 3. 오뚜기라면 관련 뉴스")
+                    all_ottogi_news = data.get("news", {}).get("오뚜기", [])
+                    ramen_news = [
+                        item for item in all_ottogi_news
+                        if "오뚜기라면" in item.get("title", "") or "오뚜기라면" in item.get("description", "")
+                    ]
+                    if ramen_news:
+                        ottogi_ana = data.get("news_analysis", {}).get("오뚜기", {})
+                        sentiment = ottogi_ana.get("sentiment", "중립")
+                        badge_cls = {"긍정": "badge-pos", "부정": "badge-neg"}.get(sentiment, "badge-neu")
+                        st.markdown(
+                            f'<span class="badge {badge_cls}">{sentiment}</span> '
+                            f'<span style="font-size:12px;color:#666;">오뚜기 뉴스 중 오뚜기라면 언급 {len(ramen_news)}건</span>',
+                            unsafe_allow_html=True,
+                        )
+                        st.markdown("")
+                        for item in ramen_news:
+                            title = item.get("title", "–")
+                            link = item.get("link", "#")
+                            date = item.get("pubDate", "")[:10]
+                            desc = item.get("description", "")
+                            st.markdown(
+                                f'<div style="background:#fff;border:1px solid #E5E5E5;border-radius:6px;'
+                                f'padding:10px 14px;margin-bottom:8px;">'
+                                f'<div style="font-size:13px;font-weight:600;margin-bottom:4px;">'
+                                f'<a href="{link}" target="_blank" style="color:#002271;text-decoration:none;">{title}</a>'
+                                f'</div>'
+                                f'<div style="font-size:12px;color:#666;margin-bottom:4px;">{date}</div>'
+                                f'<div style="font-size:12px;color:#444;line-height:1.5;">{desc}</div>'
+                                f'</div>',
+                                unsafe_allow_html=True,
+                            )
+                    else:
+                        st.info("이번 기간에 '오뚜기라면' 키워드가 포함된 뉴스가 없습니다.")
 
             # ── 뉴스 탭 ──
             with tab_news:
