@@ -323,6 +323,7 @@ def generate_insight(
     disclosure_analysis: dict,
     financial_data: dict | None,
     api_key: str,
+    subsidiary_ramen: dict | None = None,
 ) -> dict:
     """
     뉴스 분석·공시 분석·재무 데이터를 종합하여 영업 인사이트를 생성한다.
@@ -390,6 +391,21 @@ def generate_insight(
         ctx_parts.append("\n".join(fin_lines) + "\n")
     else:
         ctx_parts.append("[재무 데이터] 없음\n")
+
+    # 오뚜기라면㈜ 종속회사 재무 데이터
+    if subsidiary_ramen:
+        unit = subsidiary_ramen.get("단위", "천원")
+        period = subsidiary_ramen.get("period", "")
+        rev = subsidiary_ramen.get("매출액")
+        net = subsidiary_ramen.get("분기순이익")
+        assets = subsidiary_ramen.get("자산")
+        rev_str = f"{rev // 1_000:,}백만원" if rev is not None else "N/A"
+        net_str = f"{net // 1_000:,}백만원" if net is not None else "N/A"
+        assets_str = f"{assets // 1_000:,}백만원" if assets is not None else "N/A"
+        ctx_parts.append(
+            f"[오뚜기라면㈜ 종속회사 요약재무 ({period}, 단위:{unit})]\n"
+            f"  자산: {assets_str} / 매출액: {rev_str} / 순이익: {net_str}\n"
+        )
 
     context = "\n".join(ctx_parts)
 

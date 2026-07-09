@@ -1,6 +1,9 @@
 """
 DART Open API를 통해 거래처별 공시자료 및 재무제표를 수집한다.
 """
+import io
+import re
+import zipfile
 import requests
 from datetime import datetime, timedelta
 import streamlit as st
@@ -244,6 +247,91 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
         return result
 
     return None
+
+
+def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
+    """
+    DART 사업보고서 XML에서 종속회사 오뚜기라면㈜의 요약 재무현황을 파싱한다.
+
+    Returns:
+        {
+            "자산": int, "부채": int, "자본": int,
+            "매출액": int, "분기순이익": int,
+            "단위": "천원", "period": str,
+        }
+        또는 None (데이터 없음)
+    """
+    OTTOGI_CORP_CODE = "00141529"
+    today = datetime.today()
+
+    # 가장 최근 사업보고서(A001) 조회
+    try:
+        resp = requests.get(
+            "https://opendart.fss.or.kr/api/list.json",
+            params={
+                "crtfc_key": api_key,
+                "corp_code": OTTOGI_CORP_CODE,
+                "bgn_de": f"{today.year - 1}0101",
+                "end_de": today.strftime("%Y%m%d"),
+                "pblntf_detail_ty": "A001",  # 사업보고서
+                "page_count": 5,
+            },
+            timeout=10,
+        )
+        resp.raise_for_status()
+        filings = resp.json().get("list", [])
+    except Exception:
+        return None
+
+    if not filings:
+        return None
+
+    rcept_no = filings[0].get("rcept_no", "")
+    rcept_dt = filings[0].get("rcept_dt", "")
+    period_year = rcept_dt[:4] if rcept_dt else str(today.year - 1)
+
+    # XML ZIP 다운로드
+    try:
+        zip_resp = requests.get(
+            "https://opendart.fss.or.kr/api/document.xml",
+            params={"crtfc_key": api_key, "rcept_no": rcept_no},
+            timeout=30,
+        )
+        zip_resp.raise_for_status()
+        zf = zipfile.ZipFile(io.BytesIO(zip_resp.content))
+        xml_files = [f for f in zf.namelist() if f.endswith(".xml")]
+        if not xml_files:
+            return None
+        xml_content = zf.read(xml_files[0]).decode("utf-8", errors="ignore")
+    except Exception:
+        return None
+
+    # 오뚜기라면㈜ TR 행 파싱
+    # 패턴: <TD...>오뚜기라면㈜</TD> 뒤에 5개의 <TD ALIGN="RIGHT"...>숫자</TD>
+    pattern = (
+        r"오뚜기라면[㈜\(주\)]</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 자산
+        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 부채
+        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 자본
+        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 매출액
+        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"  # 분기순이익 (음수면 (숫자) 형태)
+    )
+    m = re.search(pattern, xml_content)
+    if not m:
+        return None
+
+    def _to_int(s: str) -> int:
+        return int(s.replace(",", ""))
+
+    return {
+        "자산": _to_int(m.group(1)),
+        "부채": _to_int(m.group(2)),
+        "자본": _to_int(m.group(3)),
+        "매출액": _to_int(m.group(4)),
+        "분기순이익": _to_int(m.group(5)),
+        "단위": "천원",
+        "period": f"{period_year}년 연간",
+    }
 
 
 def fetch_all_financials(companies: list, api_key: str) -> dict:

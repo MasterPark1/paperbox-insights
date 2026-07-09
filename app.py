@@ -240,6 +240,9 @@ if page == "📊 리포트 생성":
                 data["financials"] = dart.fetch_all_financials(
                     COMPANIES, secrets.get("dart_api_key", "")
                 )
+                data["ottogi_ramen"] = dart.fetch_ottogi_ramen_financials(
+                    secrets.get("dart_api_key", "")
+                )
             st.session_state.gen_step = 2
             render_steps(2)
 
@@ -259,12 +262,14 @@ if page == "📊 리포트 생성":
                     data["disclosure_analysis"][name] = analyzer.analyze_disclosures(
                         name, data["disclosures"].get(name, []), oai_key
                     )
+                    ramen_fin = data.get("ottogi_ramen") if name == "오뚜기" else None
                     data["insights"][name] = analyzer.generate_insight(
                         name,
                         data["news_analysis"][name],
                         data["disclosure_analysis"][name],
                         data["financials"].get(name),
                         oai_key,
+                        subsidiary_ramen=ramen_fin,
                     )
                 data["financial_comment"] = analyzer.analyze_financials(
                     data["financials"], oai_key
@@ -349,6 +354,22 @@ if page == "📊 리포트 생성":
                     fig.update_xaxes(showgrid=False)
                     fig.update_yaxes(gridcolor="#f0f0f0")
                     st.plotly_chart(fig, use_container_width=True)
+
+                # 오뚜기라면㈜ 종속회사 재무현황
+                ramen = data.get("ottogi_ramen")
+                if ramen:
+                    st.markdown("##### 오뚜기라면㈜ 종속회사 요약재무")
+                    unit = ramen.get("단위", "천원")
+                    period = ramen.get("period", "")
+                    st.caption(f"{period} / 단위: {unit}")
+                    rcol1, rcol2, rcol3, rcol4, rcol5 = st.columns(5)
+                    def _mn(v):
+                        return f"{v // 1_000:,}백만원" if v is not None else "N/A"
+                    rcol1.metric("자산", _mn(ramen.get("자산")))
+                    rcol2.metric("부채", _mn(ramen.get("부채")))
+                    rcol3.metric("자본", _mn(ramen.get("자본")))
+                    rcol4.metric("매출액", _mn(ramen.get("매출액")))
+                    rcol5.metric("순이익", _mn(ramen.get("분기순이익")))
 
                 if data.get("financial_comment"):
                     st.info(f"💬 AI 종합 코멘트: {data['financial_comment']}")

@@ -207,6 +207,43 @@ def _build_financials_section(data: dict) -> str:
 </div>"""
 
 
+def _build_ottogi_ramen_block(ramen: dict) -> str:
+    """오뚜기라면㈜ 종속회사 요약 재무현황 카드를 생성한다."""
+    if not ramen:
+        return ""
+
+    def _fmt_mn(v):
+        if v is None:
+            return "N/A"
+        return f"{v // 1_000:,.0f}백만원"
+
+    period = ramen.get("period", "")
+    unit = ramen.get("단위", "천원")
+    cells = [
+        ("자산", _fmt_mn(ramen.get("자산"))),
+        ("부채", _fmt_mn(ramen.get("부채"))),
+        ("자본", _fmt_mn(ramen.get("자본"))),
+        ("매출액", _fmt_mn(ramen.get("매출액"))),
+        ("순이익", _fmt_mn(ramen.get("분기순이익"))),
+    ]
+    td = "".join(
+        f'<td style="padding:8px 12px;border-bottom:1px solid {BORDER};font-size:13px;">'
+        f'<div style="font-size:11px;color:{MUTED};margin-bottom:2px;">{label}</div>'
+        f'<strong style="font-variant-numeric:tabular-nums;">{val}</strong></td>'
+        for label, val in cells
+    )
+    body = f"""
+<div style="font-size:12px;color:{MUTED};margin-bottom:8px;">
+  DART 사업보고서 종속회사 요약재무 ({period} / 단위:{unit})
+</div>
+<div style="overflow-x:auto;">
+  <table style="border-collapse:collapse;min-width:100%;background:{SURFACE};">
+    <tr>{td}</tr>
+  </table>
+</div>"""
+    return _card("오뚜기라면㈜ 종속회사 재무현황", body, "#7b4f00")
+
+
 def _build_company_section(company: str, data: dict) -> str:
     news_list = data.get("news", {}).get(company, [])
     news_analysis = data.get("news_analysis", {}).get(company, {})
@@ -306,6 +343,7 @@ def _build_company_section(company: str, data: dict) -> str:
   <div style="padding:16px 20px;">
     {_card("뉴스 요약", news_body, PRIMARY_CONTAINER)}
     {_card("공시 분석", disc_body, SECONDARY)}
+    {_build_ottogi_ramen_block(data.get("ottogi_ramen")) if company == "오뚜기" else ""}
     {_card("영업 인사이트", insight_body, PRIMARY)}
   </div>
 </div>"""
