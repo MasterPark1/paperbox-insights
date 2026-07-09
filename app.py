@@ -52,6 +52,28 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { padding: 6px 4px !important; }
 [data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.15) !important; }
 
+/* 사이드바 selectbox / input 배경·글자색 */
+[data-testid="stSidebar"] [data-baseweb="select"] > div,
+[data-testid="stSidebar"] [data-baseweb="select"] > div:hover {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.25) !important;
+}
+[data-testid="stSidebar"] [data-baseweb="select"] span,
+[data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] * {
+  color: #fff !important;
+}
+/* 드롭다운 메뉴 (팝업) — 흰 배경에 어두운 글자 */
+[data-baseweb="popover"] [data-baseweb="menu"] {
+  background: #fff !important;
+}
+[data-baseweb="popover"] [data-baseweb="menu"] li,
+[data-baseweb="popover"] [data-baseweb="menu"] li * {
+  color: #212529 !important;
+}
+[data-baseweb="popover"] [data-baseweb="menu"] li:hover {
+  background: #eef2ff !important;
+}
+
 /* 헤더 */
 h1, h2, h3 { font-family: 'Hanken Grotesk', sans-serif !important; color: var(--primary) !important; }
 
