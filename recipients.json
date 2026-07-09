@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "name": "park",
+    "email": "parkarea@naver.com",
+    "dept": "대표",
+    "active": true
+  }
+]
