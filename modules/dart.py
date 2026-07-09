@@ -249,22 +249,22 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
     return None
 
 
-def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
-    """
-    DART 사업보고서 XML에서 종속회사 오뚜기라면㈜의 요약 재무현황을 파싱한다.
+def _strip_tags(html: str) -> str:
+    """HTML 태그를 제거하고 공백을 정리한다."""
+    text = re.sub(r"<[^>]+>", " ", html)
+    text = re.sub(r"&nbsp;", " ", text)
+    text = re.sub(r"&amp;", "&", text)
+    text = re.sub(r"&lt;", "<", text)
+    text = re.sub(r"&gt;", ">", text)
+    text = re.sub(r"\s{2,}", " ", text)
+    return text.strip()
 
-    Returns:
-        {
-            "자산": int, "부채": int, "자본": int,
-            "매출액": int, "분기순이익": int,
-            "단위": "천원", "period": str,
-        }
-        또는 None (데이터 없음)
-    """
+
+def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
+    """오뚜기 사업보고서 XML 내용과 기간 정보를 반환한다. (xml_content, period_year, report_nm)"""
     OTTOGI_CORP_CODE = "00141529"
     today = datetime.today()
 
-    # 가장 최근 사업보고서(A001) 조회
     try:
         resp = requests.get(
             "https://opendart.fss.or.kr/api/list.json",
@@ -273,7 +273,7 @@ def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
                 "corp_code": OTTOGI_CORP_CODE,
                 "bgn_de": f"{today.year - 1}0101",
                 "end_de": today.strftime("%Y%m%d"),
-                "pblntf_detail_ty": "A001",  # 사업보고서
+                "pblntf_detail_ty": "A001",
                 "page_count": 5,
             },
             timeout=10,
@@ -288,9 +288,9 @@ def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
 
     rcept_no = filings[0].get("rcept_no", "")
     rcept_dt = filings[0].get("rcept_dt", "")
+    report_nm = filings[0].get("report_nm", "사업보고서")
     period_year = rcept_dt[:4] if rcept_dt else str(today.year - 1)
 
-    # XML ZIP 다운로드
     try:
         zip_resp = requests.get(
             "https://opendart.fss.or.kr/api/document.xml",
@@ -306,15 +306,25 @@ def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
     except Exception:
         return None
 
-    # 오뚜기라면㈜ TR 행 파싱
-    # 패턴: <TD...>오뚜기라면㈜</TD> 뒤에 5개의 <TD ALIGN="RIGHT"...>숫자</TD>
+    return xml_content, period_year, report_nm
+
+
+def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
+    """
+    DART 사업보고서 XML에서 종속회사 오뚜기라면㈜의 요약 재무현황을 파싱한다.
+    """
+    result = _fetch_ottogi_xml(api_key)
+    if not result:
+        return None
+    xml_content, period_year, _ = result
+
     pattern = (
         r"오뚜기라면[㈜\(주\)]</TD>\s*"
-        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 자산
-        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 부채
-        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 자본
-        r"<TD[^>]*>([\d,]+)</TD>\s*"   # 매출액
-        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"  # 분기순이익 (음수면 (숫자) 형태)
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"
     )
     m = re.search(pattern, xml_content)
     if not m:
@@ -330,6 +340,108 @@ def fetch_ottogi_ramen_financials(api_key: str) -> dict | None:
         "매출액": _to_int(m.group(4)),
         "분기순이익": _to_int(m.group(5)),
         "단위": "천원",
+        "period": f"{period_year}년 연간",
+    }
+
+
+def fetch_ottogi_ramen_detail(api_key: str) -> dict | None:
+    """
+    DART 사업보고서 XML에서 오뚜기라면㈜ 관련
+    1) 종속회사별 요약 재무현황 테이블 행
+    2) 사업의 개요 중 오뚜기라면(주) 관련 설명 텍스트
+    를 함께 반환한다.
+
+    Returns:
+        {
+            "financials": { 자산, 부채, 자본, 매출액, 분기순이익, 단위, period },
+            "overview_paragraphs": [ str, ... ],   # 오뚜기라면 관련 설명 단락 목록
+            "report_nm": str,
+            "period": str,
+        }
+        또는 None
+    """
+    result = _fetch_ottogi_xml(api_key)
+    if not result:
+        return None
+    xml_content, period_year, report_nm = result
+
+    # ── 1. 재무현황 테이블 파싱 ──────────────────────────────
+    fin_pattern = (
+        r"오뚜기라면[㈜\(주\)]</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>([\d,]+)</TD>\s*"
+        r"<TD[^>]*>\(?([0-9,]+)\)?</TD>"
+    )
+    fin_m = re.search(fin_pattern, xml_content)
+
+    def _to_int(s: str) -> int:
+        return int(s.replace(",", ""))
+
+    financials = None
+    if fin_m:
+        financials = {
+            "자산": _to_int(fin_m.group(1)),
+            "부채": _to_int(fin_m.group(2)),
+            "자본": _to_int(fin_m.group(3)),
+            "매출액": _to_int(fin_m.group(4)),
+            "분기순이익": _to_int(fin_m.group(5)),
+            "단위": "천원",
+            "period": f"{period_year}년 연간",
+        }
+
+    # ── 2. 사업의 개요 오뚜기라면 설명 파싱 ─────────────────
+    # <P> 또는 <TD> 안에 "오뚜기라면"이 포함된 텍스트 단락을 수집
+    # 단, 숫자 위주(테이블 셀)는 제외하고 한글 설명문만 추출
+    overview_paragraphs: list[str] = []
+    seen: set[str] = set()
+
+    # 방법1: <P ...>...</P> 블록에서 오뚜기라면 포함 단락
+    p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", xml_content, re.DOTALL | re.IGNORECASE)
+    for block in p_blocks:
+        if "오뚜기라면" not in block:
+            continue
+        text = _strip_tags(block).strip()
+        # 너무 짧거나(단순 회사명 언급), 숫자 위주 셀이면 제외
+        if len(text) < 20:
+            continue
+        # 한글 비율이 낮으면(숫자 테이블) 제외
+        korean_chars = len(re.findall(r"[가-힣]", text))
+        if korean_chars < 10:
+            continue
+        key = text[:60]
+        if key not in seen:
+            seen.add(key)
+            overview_paragraphs.append(text)
+
+    # 방법2: P 태그가 없으면 SPAN·DIV 블록도 시도
+    if not overview_paragraphs:
+        span_blocks = re.findall(
+            r"<(?:SPAN|DIV|TD)[^>]*>(.*?)</(?:SPAN|DIV|TD)>",
+            xml_content, re.DOTALL | re.IGNORECASE,
+        )
+        for block in span_blocks:
+            if "오뚜기라면" not in block:
+                continue
+            text = _strip_tags(block).strip()
+            if len(text) < 30:
+                continue
+            korean_chars = len(re.findall(r"[가-힣]", text))
+            if korean_chars < 15:
+                continue
+            key = text[:60]
+            if key not in seen:
+                seen.add(key)
+                overview_paragraphs.append(text)
+
+    # 최대 10개 단락으로 제한
+    overview_paragraphs = overview_paragraphs[:10]
+
+    return {
+        "financials": financials,
+        "overview_paragraphs": overview_paragraphs,
+        "report_nm": report_nm,
         "period": f"{period_year}년 연간",
     }
 

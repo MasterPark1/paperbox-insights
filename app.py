@@ -243,6 +243,9 @@ if page == "📊 리포트 생성":
                 data["ottogi_ramen"] = dart.fetch_ottogi_ramen_financials(
                     secrets.get("dart_api_key", "")
                 )
+                data["ottogi_ramen_detail"] = dart.fetch_ottogi_ramen_detail(
+                    secrets.get("dart_api_key", "")
+                )
             st.session_state.gen_step = 2
             render_steps(2)
 
@@ -304,8 +307,8 @@ if page == "📊 리포트 생성":
 
         if st.session_state.report_data:
             data = st.session_state.report_data
-            tab_fin, tab_news, tab_disc, tab_ins = st.tabs(
-                ["📈 재무분석", "📰 뉴스", "📋 공시", "💡 인사이트"]
+            tab_fin, tab_fin2, tab_news, tab_disc, tab_ins = st.tabs(
+                ["📈 재무분석", "📈 재무분석2", "📰 뉴스", "📋 공시", "💡 인사이트"]
             )
 
             # ── 재무분석 탭 ──
@@ -375,6 +378,79 @@ if page == "📊 리포트 생성":
                     st.info(f"💬 AI 종합 코멘트: {data['financial_comment']}")
                 else:
                     st.info("재무 데이터가 없습니다.")
+
+            # ── 재무분석2 탭 (오뚜기라면㈜ 전용) ──
+            with tab_fin2:
+                st.markdown(
+                    "<h3 style='color:#002271;margin-bottom:4px;'>"
+                    "오뚜기라면 별도 분기(반기)(년) 분석</h3>",
+                    unsafe_allow_html=True,
+                )
+                detail = data.get("ottogi_ramen_detail")
+                if not detail:
+                    st.warning("오뚜기라면㈜ 데이터를 불러오지 못했습니다. 리포트를 다시 생성해 주세요.")
+                else:
+                    report_nm = detail.get("report_nm", "사업보고서")
+                    period = detail.get("period", "")
+                    st.caption(f"출처: DART {report_nm} ({period})")
+
+                    st.markdown("---")
+
+                    # ── 섹션 1: 종속회사별 요약 재무현황 ──
+                    st.markdown("#### 1. 종속회사별 요약 재무현황 — 오뚜기라면㈜")
+                    fin = detail.get("financials")
+                    if fin:
+                        unit = fin.get("단위", "천원")
+                        st.caption(f"단위: {unit}")
+
+                        def _fmt_mn(v):
+                            if v is None:
+                                return "N/A"
+                            return f"{v // 1_000:,.0f} 백만원"
+
+                        col_a, col_b, col_c, col_d, col_e = st.columns(5)
+                        col_a.metric("자산", _fmt_mn(fin.get("자산")))
+                        col_b.metric("부채", _fmt_mn(fin.get("부채")))
+                        col_c.metric("자본", _fmt_mn(fin.get("자본")))
+                        col_d.metric("매출액", _fmt_mn(fin.get("매출액")))
+                        col_e.metric("순이익", _fmt_mn(fin.get("분기순이익")))
+
+                        # 상세 표
+                        fin_df = pd.DataFrame([{
+                            "항목": "자산",
+                            "금액 (백만원)": f"{fin['자산'] // 1_000:,}" if fin.get("자산") else "N/A",
+                        }, {
+                            "항목": "부채",
+                            "금액 (백만원)": f"{fin['부채'] // 1_000:,}" if fin.get("부채") else "N/A",
+                        }, {
+                            "항목": "자본",
+                            "금액 (백만원)": f"{fin['자본'] // 1_000:,}" if fin.get("자본") else "N/A",
+                        }, {
+                            "항목": "매출액",
+                            "금액 (백만원)": f"{fin['매출액'] // 1_000:,}" if fin.get("매출액") else "N/A",
+                        }, {
+                            "항목": "분기순이익",
+                            "금액 (백만원)": f"{fin['분기순이익'] // 1_000:,}" if fin.get("분기순이익") else "N/A",
+                        }])
+                        st.dataframe(fin_df, use_container_width=True, hide_index=True)
+                    else:
+                        st.info("재무현황 테이블 데이터를 찾을 수 없습니다.")
+
+                    st.markdown("---")
+
+                    # ── 섹션 2: 사업의 개요 ──
+                    st.markdown("#### 2. 사업의 개요 — 오뚜기라면㈜")
+                    paragraphs = detail.get("overview_paragraphs", [])
+                    if paragraphs:
+                        for p in paragraphs:
+                            st.markdown(
+                                f'<div style="background:#f8f9fb;border-left:3px solid #002271;'
+                                f'border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:8px;'
+                                f'font-size:13px;line-height:1.7;color:#212529;">{p}</div>',
+                                unsafe_allow_html=True,
+                            )
+                    else:
+                        st.info("사업의 개요에서 오뚜기라면㈜ 관련 설명을 찾지 못했습니다.")
 
             # ── 뉴스 탭 ──
             with tab_news:
