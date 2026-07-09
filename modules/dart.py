@@ -261,7 +261,7 @@ def _strip_tags(html: str) -> str:
 
 
 def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
-    """오뚜기 사업보고서 XML 내용과 기간 정보를 반환한다. (xml_content, period_year, report_nm)"""
+    """오뚜기 최신 정기공시 XML과 기간 정보를 반환한다. (xml_content, period_year, report_nm)"""
     OTTOGI_CORP_CODE = "00141529"
     today = datetime.today()
 
@@ -273,8 +273,8 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
                 "corp_code": OTTOGI_CORP_CODE,
                 "bgn_de": f"{today.year - 1}0101",
                 "end_de": today.strftime("%Y%m%d"),
-                "pblntf_detail_ty": "A001",
-                "page_count": 5,
+                "pblntf_ty": "A",   # 정기공시 전체 (사업/반기/분기 보고서 포함)
+                "page_count": 10,
             },
             timeout=10,
         )
@@ -283,12 +283,16 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
     except Exception:
         return None
 
-    if not filings:
+    # 사업보고서, 반기보고서, 분기보고서 중 가장 최신 선택
+    TARGET_REPORTS = ("사업보고서", "반기보고서", "분기보고서")
+    relevant = [f for f in filings if any(t in f.get("report_nm", "") for t in TARGET_REPORTS)]
+    if not relevant:
         return None
 
-    rcept_no = filings[0].get("rcept_no", "")
-    rcept_dt = filings[0].get("rcept_dt", "")
-    report_nm = filings[0].get("report_nm", "사업보고서")
+    filing = relevant[0]
+    rcept_no = filing.get("rcept_no", "")
+    rcept_dt = filing.get("rcept_dt", "")
+    report_nm = filing.get("report_nm", "보고서")
     period_year = rcept_dt[:4] if rcept_dt else str(today.year - 1)
 
     try:
@@ -302,7 +306,9 @@ def _fetch_ottogi_xml(api_key: str) -> tuple[str, str, str] | None:
         xml_files = [f for f in zf.namelist() if f.endswith(".xml")]
         if not xml_files:
             return None
-        xml_content = zf.read(xml_files[0]).decode("utf-8", errors="ignore")
+        # rcept_no를 파일명에 포함한 XML 우선 선택
+        main_xml = next((f for f in xml_files if rcept_no in f), xml_files[0])
+        xml_content = zf.read(main_xml).decode("utf-8", errors="ignore")
     except Exception:
         return None
 
@@ -384,58 +390,54 @@ def fetch_ottogi_ramen_detail(api_key: str) -> dict | None:
         }
         break
 
-    # ── 2. 사업의 개요 오뚜기라면 설명 파싱 ─────────────────
+    # ── 2. □ 오뚜기라면(주) 섹션 설명 파싱 ──────────────────
+    # 보고서의 각 종속회사 설명 섹션은 "□ 회사명" 헤더로 시작한다.
+    # XML에서 □+오뚜기라면 마커 위치를 찾고, 다음 □ 마커까지의 텍스트를 추출.
     overview_paragraphs: list[str] = []
-    seen: set[str] = set()
 
-    def _is_descriptive(text: str) -> bool:
-        """단순 목록이 아니라 서술적 내용인지 판단한다."""
-        if len(text) < 30:
-            return False
-        # 한글 비율이 낮으면 제외 (숫자 테이블)
-        korean = len(re.findall(r"[가-힣]", text))
-        if korean < 15:
-            return False
-        # 콤마가 지나치게 많으면 종속회사 목록 나열 문장 → 제외
-        # 단, 문장이 충분히 길면 목록 포함이어도 허용
-        comma_count = text.count(",")
-        if comma_count > 6 and len(text) < 200:
-            return False
-        # "㈜" 또는 "(주)"가 3개 이상 연속 등장 → 회사 목록 나열 문장 제외
-        company_marks = len(re.findall(r"[㈜]|(\(주\))", text))
-        if company_marks >= 4 and len(text) < 300:
-            return False
-        return True
+    # □ 오뚜기라면 헤더 위치 탐색 (□ U+25A1 또는 ■ U+25A0)
+    marker_pat = re.compile(r"[□■▣◆]\s*오뚜기라면")
+    marker_m = marker_pat.search(xml_content)
 
-    # <P> 블록 우선 탐색
-    p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", xml_content, re.DOTALL | re.IGNORECASE)
-    for block in p_blocks:
-        if "오뚜기라면" not in block:
-            continue
-        text = _strip_tags(block).strip()
-        if not _is_descriptive(text):
-            continue
-        key = text[:80]
-        if key not in seen:
-            seen.add(key)
+    if marker_m:
+        start = marker_m.start()
+        # 다음 □ 마커 위치 (다른 회사 섹션 시작) 또는 최대 5000자
+        next_marker = marker_pat.search(xml_content, start + 1)
+        end = next_marker.start() if next_marker else min(start + 5000, len(xml_content))
+        section_html = xml_content[start:end]
+
+        # 섹션 내 <P> 태그 추출
+        p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", section_html, re.DOTALL | re.IGNORECASE)
+        for block in p_blocks:
+            text = _strip_tags(block).strip()
+            if len(text) < 15:
+                continue
             overview_paragraphs.append(text)
 
-    # P 태그가 없으면 SPAN 블록 시도
+        # <P> 없으면 섹션 전체를 줄바꿈 기준으로 분할
+        if not overview_paragraphs:
+            plain = _strip_tags(section_html)
+            for line in re.split(r"\n+", plain):
+                line = line.strip()
+                if len(line) >= 15:
+                    overview_paragraphs.append(line)
+
+    # □ 마커가 없으면 기존 방식 폴백: 서술형 <P> 단락에서 수집
     if not overview_paragraphs:
-        span_blocks = re.findall(
-            r"<SPAN[^>]*>(.*?)</SPAN>",
-            xml_content, re.DOTALL | re.IGNORECASE,
-        )
-        for block in span_blocks:
+        p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", xml_content, re.DOTALL | re.IGNORECASE)
+        for block in p_blocks:
             if "오뚜기라면" not in block:
                 continue
             text = _strip_tags(block).strip()
-            if not _is_descriptive(text):
+            if len(text) < 30:
                 continue
-            key = text[:80]
-            if key not in seen:
-                seen.add(key)
-                overview_paragraphs.append(text)
+            korean = len(re.findall(r"[가-힣]", text))
+            if korean < 15:
+                continue
+            # 회사명 나열 문장 제외
+            if len(re.findall(r"[㈜]", text)) >= 4 and len(text) < 300:
+                continue
+            overview_paragraphs.append(text)
 
     return {
         "financials": financials,
