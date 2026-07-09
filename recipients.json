@@ -4,17 +4,5 @@
     "email": "parkarea@naver.com",
     "dept": "대표",
     "active": true
-  },
-  {
-    "name": "임",
-    "email": "lss4560@hansol.com",
-    "dept": "개발",
-    "active": true
-  },
-  {
-    "name": "임",
-    "email": "lss4560@hansol.com",
-    "dept": "영업",
-    "active": true
   }
 ]
