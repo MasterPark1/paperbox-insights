@@ -815,6 +815,23 @@ elif page == "⏱ 실행 이력":
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif page == "⚙️ 설정":
     st.markdown("## ⚙️ 시스템 설정")
+
+    # ── 관리자 인증 ──
+    if "admin_authed" not in st.session_state:
+        st.session_state.admin_authed = False
+
+    if not st.session_state.admin_authed:
+        st.warning("🔒 이 페이지는 관리자 전용입니다.")
+        pw_input = st.text_input("관리자 비밀번호", type="password", key="admin_pw_input")
+        if st.button("확인", key="btn_admin_login"):
+            admin_pw = config.get_secrets().get("admin_password", "")
+            if admin_pw and pw_input == admin_pw:
+                st.session_state.admin_authed = True
+                st.rerun()
+            else:
+                st.error("비밀번호가 올바르지 않습니다.")
+        st.stop()
+
     st.info("💡 API 키는 Streamlit Community Cloud의 Secrets 설정에서 관리합니다. 아래는 현재 연결 상태를 확인하는 테스트 기능입니다.")
 
     secrets = config.get_secrets()
