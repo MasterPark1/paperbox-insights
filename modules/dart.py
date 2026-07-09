@@ -426,56 +426,34 @@ def fetch_ottogi_ramen_detail(
 
     # ── 2. □ 오뚜기라면(주) 섹션 설명 파싱 ──────────────────
     # 보고서의 각 종속회사 설명 섹션은 "□ 회사명" 헤더로 시작한다.
-    # XML에서 □+오뚜기라면 마커 위치를 찾고, 다음 □ 마커까지의 텍스트를 추출.
+    # HTML 태그를 모두 제거한 순수 텍스트에서 정확한 섹션 경계를 찾는다.
     overview_paragraphs: list[str] = []
 
-    # □ 오뚜기라면 헤더 위치 탐색 (□ U+25A1 또는 ■ U+25A0)
-    marker_pat = re.compile(r"[□■▣◆]\s*오뚜기라면")
-    marker_m = marker_pat.search(xml_content)
+    plain_text = _strip_tags(xml_content)
 
-    if marker_m:
-        start = marker_m.start()
-        # 다음 □ 마커 위치 (다른 회사 섹션 시작) 또는 최대 5000자
-        next_marker = marker_pat.search(xml_content, start + 1)
-        end = next_marker.start() if next_marker else min(start + 5000, len(xml_content))
-        section_html = xml_content[start:end]
+    # □ 오뚜기라면 헤더 위치 탐색
+    section_m = re.search(r"[□■▣◆]\s*오뚜기라면", plain_text)
+    if section_m:
+        s = section_m.start()
+        # 다음 □ 헤더(다른 회사 섹션 시작)를 찾아 섹션 끝으로 사용
+        # \n 이후에 나오는 □ 패턴을 다음 섹션 시작으로 인식
+        next_section_m = re.search(r"[□■▣◆]\s*\S", plain_text[s + 5:])
+        if next_section_m:
+            e = s + 5 + next_section_m.start()
+        else:
+            e = s + 2000
 
-        # 섹션 내 <P> 태그 추출
-        p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", section_html, re.DOTALL | re.IGNORECASE)
-        for block in p_blocks:
-            text = _strip_tags(block).strip()
-            if len(text) < 15:
-                continue
-            overview_paragraphs.append(text)
+        section_text = plain_text[s:e].strip()
 
-        # <P> 없으면 섹션 전체를 줄바꿈 기준으로 분할
-        if not overview_paragraphs:
-            plain = _strip_tags(section_html)
-            for line in re.split(r"\n+", plain):
-                line = line.strip()
-                if len(line) >= 15:
-                    overview_paragraphs.append(line)
-
-    # □ 마커가 없으면 기존 방식 폴백: 서술형 <P> 단락에서 수집
-    if not overview_paragraphs:
-        p_blocks = re.findall(r"<P[^>]*>(.*?)</P>", xml_content, re.DOTALL | re.IGNORECASE)
-        for block in p_blocks:
-            if "오뚜기라면" not in block:
-                continue
-            text = _strip_tags(block).strip()
-            if len(text) < 30:
-                continue
-            korean = len(re.findall(r"[가-힣]", text))
-            if korean < 15:
-                continue
-            # 회사명 나열 문장 제외
-            if len(re.findall(r"[㈜]", text)) >= 4 and len(text) < 300:
-                continue
-            overview_paragraphs.append(text)
+        # 줄바꿈 기준으로 의미있는 단락 분리
+        for line in re.split(r"\s{3,}|\n{2,}", section_text):
+            line = re.sub(r"\s+", " ", line).strip()
+            if len(line) >= 15:
+                overview_paragraphs.append(line)
 
     return {
         "financials": financials,
-        "overview_paragraphs": overview_paragraphs[:10],
+        "overview_paragraphs": overview_paragraphs[:8],
         "report_nm": report_nm,
         "period": f"{period_year}년 연간",
     }
