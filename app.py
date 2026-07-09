@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 import json
 import os
 
-from modules import news, dart, analyzer, report, mailer, config
+from modules import news, dart, analyzer, report, mailer, config, history
 from modules.news import COMPANIES
 import scheduler
 
@@ -147,6 +147,59 @@ with st.sidebar:
         ["📊 리포트 생성", "📋 리포트 조회", "👥 수신자 관리", "⏱ 실행 이력", "⚙️ 설정"],
         label_visibility="collapsed",
     )
+
+    # ── 이전 리포트 불러오기 ──
+    st.divider()
+    st.markdown('<div style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:6px">📂 이전 리포트 불러오기</div>', unsafe_allow_html=True)
+
+    if "snapshots_loaded" not in st.session_state:
+        st.session_state.snapshots_loaded = False
+    if "snapshot_list" not in st.session_state:
+        st.session_state.snapshot_list = []
+
+    if st.button("목록 새로고침", use_container_width=True, key="btn_refresh_snapshots"):
+        with st.spinner("목록 로딩 중..."):
+            st.session_state.snapshot_list = history.list_snapshots()
+        st.session_state.snapshots_loaded = True
+
+    if st.session_state.snapshots_loaded:
+        snaps = st.session_state.snapshot_list
+        if not snaps:
+            st.caption("저장된 리포트가 없습니다.")
+        else:
+            options = {s["display"]: s for s in snaps}
+            chosen_label = st.selectbox(
+                "날짜 선택",
+                list(options.keys()),
+                label_visibility="collapsed",
+                key="sel_snapshot",
+            )
+            col_load, col_del = st.columns(2)
+            with col_load:
+                if st.button("불러오기", use_container_width=True, key="btn_load_snap"):
+                    snap_info = options[chosen_label]
+                    with st.spinner("로딩 중..."):
+                        snap = history.load_snapshot(snap_info["path"])
+                    if snap:
+                        st.session_state.report_data = snap["data"]
+                        st.session_state.report_html = None
+                        st.session_state.report_path = None
+                        st.success(f"✅ {chosen_label} 불러옴")
+                        st.rerun()
+                    else:
+                        st.error("불러오기 실패")
+            with col_del:
+                if st.button("삭제", use_container_width=True, key="btn_del_snap"):
+                    snap_info = options[chosen_label]
+                    ok, msg = history.delete_snapshot(snap_info["path"], snap_info["sha"])
+                    if ok:
+                        st.session_state.snapshot_list = [
+                            s for s in snaps if s["filename"] != snap_info["filename"]
+                        ]
+                        st.success("삭제 완료")
+                        st.rerun()
+                    else:
+                        st.error(msg)
 
     st.divider()
     next_run = scheduler.get_next_run()
@@ -297,6 +350,14 @@ if page == "📊 리포트 생성":
 
             progress_bar.progress(1.0)
             st.success(f"✅ 리포트 생성 완료 — {file_path}")
+
+            # 스냅샷 자동 저장
+            ok, msg = history.save_snapshot(data)
+            if ok:
+                st.caption(f"💾 기록 저장됨: {msg}")
+            else:
+                st.caption(f"⚠️ 기록 저장 실패: {msg}")
+
             config.append_log({
                 "timestamp": datetime.now().isoformat(),
                 "type": "manual",
@@ -390,37 +451,20 @@ if page == "📊 리포트 생성":
                     fin = detail.get("financials")
                     if fin:
                         unit = fin.get("단위", "천원")
-                        st.caption(f"단위: {unit}")
+                        st.caption(f"단위: 백만원 (원본: {unit})")
 
                         def _fmt_mn(v):
                             if v is None:
                                 return "N/A"
-                            return f"{v // 1_000:,.0f} 백만원"
+                            return f"{v // 1_000:,}"
 
-                        col_a, col_b, col_c, col_d, col_e = st.columns(5)
-                        col_a.metric("자산", _fmt_mn(fin.get("자산")))
-                        col_b.metric("부채", _fmt_mn(fin.get("부채")))
-                        col_c.metric("자본", _fmt_mn(fin.get("자본")))
-                        col_d.metric("매출액", _fmt_mn(fin.get("매출액")))
-                        col_e.metric("순이익", _fmt_mn(fin.get("분기순이익")))
-
-                        # 상세 표
-                        fin_df = pd.DataFrame([{
-                            "항목": "자산",
-                            "금액 (백만원)": f"{fin['자산'] // 1_000:,}" if fin.get("자산") else "N/A",
-                        }, {
-                            "항목": "부채",
-                            "금액 (백만원)": f"{fin['부채'] // 1_000:,}" if fin.get("부채") else "N/A",
-                        }, {
-                            "항목": "자본",
-                            "금액 (백만원)": f"{fin['자본'] // 1_000:,}" if fin.get("자본") else "N/A",
-                        }, {
-                            "항목": "매출액",
-                            "금액 (백만원)": f"{fin['매출액'] // 1_000:,}" if fin.get("매출액") else "N/A",
-                        }, {
-                            "항목": "분기순이익",
-                            "금액 (백만원)": f"{fin['분기순이익'] // 1_000:,}" if fin.get("분기순이익") else "N/A",
-                        }])
+                        fin_df = pd.DataFrame([
+                            {"항목": "자산",       "금액 (백만원)": _fmt_mn(fin.get("자산"))},
+                            {"항목": "부채",       "금액 (백만원)": _fmt_mn(fin.get("부채"))},
+                            {"항목": "자본",       "금액 (백만원)": _fmt_mn(fin.get("자본"))},
+                            {"항목": "매출액",     "금액 (백만원)": _fmt_mn(fin.get("매출액"))},
+                            {"항목": "분기순이익", "금액 (백만원)": _fmt_mn(fin.get("분기순이익"))},
+                        ])
                         st.dataframe(fin_df, use_container_width=True, hide_index=True)
                     else:
                         st.info("재무현황 테이블 데이터를 찾을 수 없습니다.")
