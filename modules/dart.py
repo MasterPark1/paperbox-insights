@@ -173,19 +173,23 @@ def fetch_financials(corp_code: str, api_key: str) -> dict | None:
         }
         값이 없는 항목은 None으로 채워진다.
     """
-    current_year = datetime.today().year
-    # (연도, 보고서코드) 조합을 우선순위 순으로 구성
-    # 전년도 연간/반기 → 당해 연간/반기/분기 순으로 시도 (안정적 데이터 우선)
-    candidates = [
-        (str(current_year - 1), "11011"),
-        (str(current_year - 1), "11012"),
-        (str(current_year - 1), "11013"),
-        (str(current_year - 1), "11014"),
-        (str(current_year), "11011"),
-        (str(current_year), "11012"),
-        (str(current_year), "11013"),
-        (str(current_year), "11014"),
-    ]
+    today = datetime.today()
+    current_year = today.year
+    month = today.month
+
+    # 현재 월 기준으로 조회할 보고서 1개만 결정
+    if month < 4:
+        # 1~3월: 전년도 연간
+        candidates = [(str(current_year - 1), "11011")]
+    elif month < 7:
+        # 4~6월: 당해 1분기
+        candidates = [(str(current_year), "11013")]
+    elif month < 10:
+        # 7~9월: 당해 반기(2분기)
+        candidates = [(str(current_year), "11012")]
+    else:
+        # 10~12월: 당해 3분기
+        candidates = [(str(current_year), "11014")]
 
     for bsns_year, reprt_code in candidates:
         items = None
