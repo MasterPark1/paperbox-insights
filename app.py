@@ -186,28 +186,30 @@ if page == "📊 리포트 생성":
             st.session_state.gen_step = 0
 
         # 진행 단계 표시
-        steps = [
+        STEPS = [
             "네이버 뉴스 수집 (4개사)",
             "DART 공시·재무 수집",
             "OpenAI 분석 및 요약",
             "통합 리포트 생성",
         ]
-        step = st.session_state.gen_step
-        prog_val = step / len(steps)
 
-        progress_bar = st.progress(prog_val)
-        for i, s in enumerate(steps):
-            if i < step:
-                icon = "✅"
-                txt_style = "color:#155724"
-            elif i == step and run_btn:
-                icon = "⟳"
-                txt_style = "color:#002271;font-weight:600"
-            else:
-                icon = "○"
-                txt_style = "color:#aaa"
-            st.markdown(f'<div class="step-row"><span>{icon}</span><span style="{txt_style}">{s}</span></div>',
-                        unsafe_allow_html=True)
+        progress_bar = st.progress(st.session_state.gen_step / len(STEPS))
+        step_placeholders = [st.empty() for _ in STEPS]
+
+        def render_steps(current_step: int) -> None:
+            for i, s in enumerate(STEPS):
+                if i < current_step:
+                    icon, style = "✅", "color:#155724"
+                elif i == current_step:
+                    icon, style = "⟳", "color:#002271;font-weight:600"
+                else:
+                    icon, style = "○", "color:#aaa"
+                step_placeholders[i].markdown(
+                    f'<div class="step-row"><span>{icon}</span><span style="{style}">{s}</span></div>',
+                    unsafe_allow_html=True,
+                )
+
+        render_steps(st.session_state.gen_step)
 
     # 리포트 생성 실행
     if run_btn:
@@ -216,7 +218,8 @@ if page == "📊 리포트 생성":
 
         with col_ctrl:
             # Step 1: 뉴스
-            st.session_state.gen_step = 1
+            st.session_state.gen_step = 0
+            render_steps(0)
             progress_bar.progress(0.1)
             with st.spinner("뉴스 수집 중..."):
                 data["news"] = news.fetch_all_news(
@@ -225,9 +228,10 @@ if page == "📊 리포트 생성":
                     secrets.get("naver_client_secret", ""),
                     days=days,
                 )
+            st.session_state.gen_step = 1
+            render_steps(1)
 
             # Step 2: DART
-            st.session_state.gen_step = 2
             progress_bar.progress(0.35)
             with st.spinner("DART 공시 수집 중..."):
                 data["disclosures"] = dart.fetch_all_disclosures(
@@ -236,9 +240,10 @@ if page == "📊 리포트 생성":
                 data["financials"] = dart.fetch_all_financials(
                     COMPANIES, secrets.get("dart_api_key", "")
                 )
+            st.session_state.gen_step = 2
+            render_steps(2)
 
             # Step 3: AI 분석
-            st.session_state.gen_step = 3
             progress_bar.progress(0.6)
             oai_key = secrets.get("openai_api_key", "")
             data["news_analysis"] = {}
@@ -264,15 +269,18 @@ if page == "📊 리포트 생성":
                 data["financial_comment"] = analyzer.analyze_financials(
                     data["financials"], oai_key
                 )
+            st.session_state.gen_step = 3
+            render_steps(3)
 
             # Step 4: 리포트 생성
-            st.session_state.gen_step = 4
             progress_bar.progress(0.9)
             with st.spinner("리포트 생성 중..."):
                 html_str, file_path = report.generate_report(data, days=days)
                 st.session_state.report_data = data
                 st.session_state.report_html = html_str
                 st.session_state.report_path = file_path
+            st.session_state.gen_step = 4
+            render_steps(4)
 
             progress_bar.progress(1.0)
             st.success(f"✅ 리포트 생성 완료 — {file_path}")
