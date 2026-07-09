@@ -1,11 +1,85 @@
 """설정값 로드, 저장, 검증을 담당한다."""
 import json
 import os
+import base64
+import requests
 from pathlib import Path
 import streamlit as st
 
 RECIPIENTS_FILE = "recipients.json"
 LOG_FILE = "logs/execution.log"
+
+_GITHUB_REPO = "MasterPark1/paperbox-insights"
+_GITHUB_PATH = "recipients.json"
+_GITHUB_BRANCH = "main"
+
+
+def _github_token() -> str:
+    try:
+        for k in ("GITHUB_TOKEN", "github_token"):
+            v = st.secrets.get(k)
+            if v:
+                return str(v)
+    except Exception:
+        pass
+    return os.environ.get("GITHUB_TOKEN", "")
+
+
+def _github_get_file() -> tuple[list[dict], str]:
+    """GitHub에서 recipients.json을 읽어 (데이터, sha) 반환. 없으면 ([], "")."""
+    token = _github_token()
+    if not token:
+        return _load_local(), ""
+    url = f"https://api.github.com/repos/{_GITHUB_REPO}/contents/{_GITHUB_PATH}"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    r = requests.get(url, headers=headers, params={"ref": _GITHUB_BRANCH}, timeout=10)
+    if r.status_code == 404:
+        return [], ""
+    if r.status_code != 200:
+        return _load_local(), ""
+    body = r.json()
+    content = base64.b64decode(body["content"]).decode("utf-8")
+    sha = body["sha"]
+    try:
+        data = json.loads(content)
+        return data if isinstance(data, list) else [], sha
+    except json.JSONDecodeError:
+        return [], sha
+
+
+def _github_put_file(recipients: list[dict], sha: str) -> bool:
+    """GitHub에 recipients.json을 저장. 성공 시 True."""
+    token = _github_token()
+    if not token:
+        return False
+    url = f"https://api.github.com/repos/{_GITHUB_REPO}/contents/{_GITHUB_PATH}"
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    content = base64.b64encode(
+        json.dumps(recipients, ensure_ascii=False, indent=2).encode("utf-8")
+    ).decode("utf-8")
+    payload = {
+        "message": "update recipients",
+        "content": content,
+        "branch": _GITHUB_BRANCH,
+    }
+    if sha:
+        payload["sha"] = sha
+    r = requests.put(url, headers=headers, json=payload, timeout=10)
+    return r.status_code in (200, 201)
+
+
+def _load_local() -> list[dict]:
+    try:
+        with open(RECIPIENTS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+def _save_local(recipients: list[dict]) -> None:
+    with open(RECIPIENTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(recipients, f, ensure_ascii=False, indent=2)
 
 
 # ---------------------------------------------------------------------------
@@ -13,21 +87,17 @@ LOG_FILE = "logs/execution.log"
 # ---------------------------------------------------------------------------
 
 def load_recipients() -> list[dict]:
-    """recipients.json을 읽어 수신자 목록을 반환한다. 파일이 없으면 빈 리스트 반환."""
-    try:
-        with open(RECIPIENTS_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        if isinstance(data, list):
-            return data
-        return []
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+    """GitHub 또는 로컬에서 수신자 목록을 반환한다."""
+    data, _ = _github_get_file()
+    return data
 
 
 def save_recipients(recipients: list[dict]) -> None:
-    """수신자 목록을 recipients.json에 저장한다."""
-    with open(RECIPIENTS_FILE, "w", encoding="utf-8") as f:
-        json.dump(recipients, f, ensure_ascii=False, indent=2)
+    """수신자 목록을 GitHub에 저장한다. 토큰 없으면 로컬 저장."""
+    _, sha = _github_get_file()
+    success = _github_put_file(recipients, sha)
+    if not success:
+        _save_local(recipients)
 
 
 def add_recipient(name: str, email: str, dept: str) -> list[dict]:
