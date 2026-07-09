@@ -52,17 +52,23 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label { padding: 6px 4px !important; }
 [data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.15) !important; }
 
-/* 사이드바 selectbox / input 배경·글자색 */
+/* 사이드바 selectbox 전체 영역 — 연한 녹색 배경 */
+[data-testid="stSidebar"] .stSelectbox,
+[data-testid="stSidebar"] .stSelectbox > div,
+[data-testid="stSidebar"] .stSelectbox > div > div,
+[data-testid="stSidebar"] [data-baseweb="select"],
 [data-testid="stSidebar"] [data-baseweb="select"] > div,
-[data-testid="stSidebar"] [data-baseweb="select"] > div:hover {
-  background: rgba(255,255,255,0.12) !important;
-  border-color: rgba(255,255,255,0.25) !important;
+[data-testid="stSidebar"] [data-baseweb="select"] > div > div,
+[data-testid="stSidebar"] [data-baseweb="select"] input {
+  background-color: #c8e6c9 !important;
+  border-color: #81c784 !important;
+  color: #1b2e1c !important;
 }
 [data-testid="stSidebar"] [data-baseweb="select"] span,
-[data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] * {
-  color: #fff !important;
+[data-testid="stSidebar"] [data-baseweb="select"] * {
+  color: #1b2e1c !important;
 }
-/* 드롭다운 메뉴 (팝업) — 흰 배경에 어두운 글자 */
+/* 드롭다운 팝업 */
 [data-baseweb="popover"] [data-baseweb="menu"] {
   background: #fff !important;
 }
@@ -71,7 +77,7 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
   color: #212529 !important;
 }
 [data-baseweb="popover"] [data-baseweb="menu"] li:hover {
-  background: #eef2ff !important;
+  background: #e8f5e9 !important;
 }
 
 /* 헤더 */
