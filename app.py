@@ -594,14 +594,17 @@ if page == "📊 리포트 생성":
                         st.info("이번 기간에 '오뚜기라면' 키워드가 포함된 뉴스가 없습니다.")
 
             # ── 뉴스 탭 ──
-            # 팔도: "팔도라면/비빔면/식품" 중 하나가 포함된 기사만 유효
             def _filter_news(name: str, items: list) -> list:
-                if name != "팔도":
-                    return items
                 result = []
                 for item in items:
                     text = item.get("title", "") + item.get("description", "")
-                    if "팔도" in text and ("라면" in text or "비빔면" in text):
+                    if name == "팔도":
+                        if "팔도" in text and ("라면" in text or "비빔면" in text):
+                            result.append(item)
+                    elif name == "농심":
+                        if "농심" in text and ("라면" in text or "그룹" in text):
+                            result.append(item)
+                    else:
                         result.append(item)
                 return result
 
