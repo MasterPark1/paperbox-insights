@@ -594,17 +594,33 @@ if page == "📊 리포트 생성":
                         st.info("이번 기간에 '오뚜기라면' 키워드가 포함된 뉴스가 없습니다.")
 
             # ── 뉴스 탭 ──
+            # 팔도: "팔도라면/비빔면/식품" 중 하나가 포함된 기사만 유효
+            _PALDO_REQUIRED = ["팔도라면", "팔도비빔면", "팔도식품", "팔도 라면", "팔도 비빔면"]
+
+            def _filter_news(name: str, items: list) -> list:
+                if name != "팔도":
+                    return items
+                return [
+                    item for item in items
+                    if any(
+                        kw in item.get("title", "") + item.get("description", "")
+                        for kw in _PALDO_REQUIRED
+                    )
+                ]
+
             with tab_news:
                 for c in COMPANIES:
                     name = c["name"]
                     ana = data["news_analysis"].get(name, {})
-                    items = data["news"].get(name, [])
+                    raw_items = data["news"].get(name, [])
+                    items = _filter_news(name, raw_items)
                     sentiment = ana.get("sentiment", "중립")
                     badge_cls = {"긍정": "badge-pos", "부정": "badge-neg"}.get(sentiment, "badge-neu")
                     imp = ana.get("importance", "보통")
                     imp_cls = {"높음": "badge-high", "보통": "badge-mid", "낮음": "badge-low"}.get(imp, "badge-mid")
 
-                    with st.expander(f"**{name}** — 뉴스 {len(items)}건", expanded=(name == COMPANIES[0]["name"])):
+                    filtered_note = f" (필터 후 {len(items)}건)" if name == "팔도" and len(items) != len(raw_items) else ""
+                    with st.expander(f"**{name}** — 뉴스 {len(items)}건{filtered_note}", expanded=(name == COMPANIES[0]["name"])):
                         st.markdown(
                             f'<span class="badge {badge_cls}">{sentiment}</span> '
                             f'<span class="badge {imp_cls}">중요도: {imp}</span>',
@@ -621,6 +637,8 @@ if page == "📊 리포트 생성":
                             st.markdown("**뉴스 목록**")
                             for item in items[:5]:
                                 st.markdown(f"- [{item.get('title','–')}]({item.get('link','#')}) `{item.get('pubDate','')[:10]}`")
+                        elif name == "팔도":
+                            st.caption("팔도 관련 뉴스가 없거나 모두 필터링되었습니다.")
 
             # ── 공시 탭 ──
             with tab_disc:
