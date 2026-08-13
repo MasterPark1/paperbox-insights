@@ -1,0 +1,846 @@
+{
+  "saved_at": "2026-08-13T06:37:40",
+  "label": "20260813_063740",
+  "data": {
+    "financials": {
+      "오뚜기": {
+        "period": "2026년 1분기",
+        "reprt_code": "11013",
+        "bsns_year": "2026",
+        "매출액": {
+          "current": 955199820487,
+          "previous": 920765241160
+        },
+        "영업이익": {
+          "current": 59381524921,
+          "previous": 57494160512
+        },
+        "법인세차감전순이익": {
+          "current": 49285462397,
+          "previous": 46151857880
+        },
+        "당기순이익": {
+          "current": 35045783010,
+          "previous": 33232862987
+        }
+      },
+      "삼양식품": {
+        "period": "2026년 1분기",
+        "reprt_code": "11013",
+        "bsns_year": "2026",
+        "매출액": {
+          "current": 714406081624,
+          "previous": 529013206877
+        },
+        "영업이익": {
+          "current": 177133059786,
+          "previous": 133988454361
+        },
+        "법인세차감전순이익": {
+          "current": 201190439606,
+          "previous": 134981369047
+        },
+        "당기순이익": {
+          "current": 144515643100,
+          "previous": 98959454226
+        }
+      },
+      "농심": {
+        "period": "2026년 1분기",
+        "reprt_code": "11013",
+        "bsns_year": "2026",
+        "매출액": {
+          "current": 934029005207,
+          "previous": 893036319476
+        },
+        "영업이익": {
+          "current": 67424701255,
+          "previous": 56051767375
+        },
+        "법인세차감전순이익": {
+          "current": 80901275059,
+          "previous": 68502053993
+        },
+        "당기순이익": {
+          "current": 60676367253,
+          "previous": 52158932810
+        }
+      },
+      "팔도": null
+    },
+    "ottogi_ramen_detail": {
+      "financials": {
+        "자산": 461438410,
+        "부채": 117891230,
+        "자본": 343547180,
+        "매출액": 161724692,
+        "분기순이익": 5787943,
+        "단위": "천원",
+        "period": "2026년 연간"
+      },
+      "overview_paragraphs": [
+        "□ 오뚜기라면(주) 2026년 당분기 매출액은 1,617억원으로 전년 동기 1,802억원 대비 10.25% 감소했고, 분기순이익은 5,788백만원으로 전년 동기 7,105백만원 대비 18.54% 감소했습니다.K-라면의 글로벌 인기에 힘입어 아시아, 미국, 유럽 등 다양한 해외 시장에 특화된 수출용 라면 개발에도 박차를 가하고 있으며, 각 국가별 특성에 맞춘 맞춤형 전략을 통해 지속적인 성장을 이루고자 노력하고 있습니다."
+      ],
+      "report_nm": "분기보고서 (2026.03)",
+      "period": "2026년 연간"
+    },
+    "insights": {
+      "오뚜기": {
+        "order_forecast": "오뚜기의 컵라면 가격 인상에도 불구하고 봉지라면 가격 동결로 인해 소비자 수요가 일부 유지될 가능성이 있어 발주 가능성은 안정적일 것으로 예상됨.",
+        "risks": [
+          "원재료 및 포장재 가격 상승으로 인한 원가 부담",
+          "고환율로 인한 수익성 악화",
+          "소비자 수요 감소 가능성"
+        ],
+        "opportunities": [
+          "봉지라면 가격 동결로 경쟁사 대비 가격 경쟁 우위 확보",
+          "컵라면 가격 인상으로 인한 매출 증가 가능성",
+          "신제품 출시 및 수출 확대를 통한 시장 점유율 증가"
+        ],
+        "strategy": "오뚜기의 라면 부문 매출 비중이 높아 컵라면과 봉지라면의 가격 정책을 면밀히 분석하여 고객 맞춤형 제안을 강화해야 합니다. 또한, 신제품 출시 및 수출 확대를 통해 시장 점유율을 높이고, 가격 인상에 따른 소비자 반응을 모니터링하여 적절한 대응 전략을 마련해야 합니다.",
+        "priority": "A"
+      },
+      "삼양식품": {
+        "order_forecast": "삼양식품의 해외 시장 성장과 불닭볶음면의 인기 증가로 인해 종이용기 수요가 증가할 것으로 예상되며, 안정적인 발주 가능성이 높아질 것입니다.",
+        "risks": [
+          "EU 포장 규제에 대한 대응 필요성",
+          "원자재 가격 변동에 따른 생산 비용 증가",
+          "경쟁사의 가격 인하 및 마케팅 강화"
+        ],
+        "opportunities": [
+          "삼양식품의 IP 사업 확장을 통한 신규 거래처 확보",
+          "해외 시장에서의 브랜드 인지도 상승에 따른 수요 증가",
+          "지속 가능한 포장재 개발에 대한 관심 증가"
+        ],
+        "strategy": "삼양식품의 해외 진출과 신제품 출시를 적극적으로 지원하기 위해 고객 맞춤형 종이용기 솔루션을 제공하고, EU 포장 규제에 대응하기 위한 친환경 포장재 개발에 집중할 것입니다. 또한, 불닭볶음면의 인기에 발맞춰 관련 제품의 포장 수요를 선제적으로 확보할 계획입니다.",
+        "priority": "A"
+      },
+      "농심": {
+        "order_forecast": "농심의 가격 인상에도 불구하고, 라면 부문은 여전히 매출의 큰 비중을 차지하고 있어 발주 가능성은 유지될 것으로 예상됩니다. 그러나 원자재 조달에 대한 불확실성이 존재하여 주의가 필요합니다.",
+        "risks": [
+          "가격 인상으로 인한 거래처 원가 부담 증가",
+          "가뭄 및 폭염으로 인한 원자재 공급 차질",
+          "소비자 구매력 저하"
+        ],
+        "opportunities": [
+          "농심의 라면 부문은 전체 매출의 상당 부분을 차지하고 있으며, 신제품 출시와 수출 확대를 통해 시장 점유율을 높일 수 있는 기회가 존재합니다.",
+          "농심천심 운동을 통한 브랜드 이미지 강화로 소비자 신뢰도를 높일 수 있습니다."
+        ],
+        "strategy": "농심의 라면 부문은 전체 매출의 중요한 비중을 차지하고 있으며, 신제품 출시와 수출 확대를 통해 시장 점유율을 더욱 강화할 수 있습니다. 따라서, 원자재 조달의 안정성을 확보하고, 가격 인상에 대한 고객의 이해를 돕는 커뮤니케이션 전략을 강화하는 것이 중요합니다.",
+        "priority": "A"
+      },
+      "팔도": {
+        "order_forecast": "팔도의 베트남 시장 집중과 국내 AI 추천 점유율 상승으로 인해 발주 가능성이 높아질 것으로 예상됩니다.",
+        "risks": [
+          "원가 상승에 따른 가격 인상",
+          "소비자 반응 변화에 대한 불확실성"
+        ],
+        "opportunities": [
+          "해외 매출 증가 가능성",
+          "여름 시즌 이벤트와 프로모션을 통한 판매 증가"
+        ],
+        "strategy": "팔도의 베트남 시장 전략에 맞춰 종이용기 공급을 확대하고, 여름 시즌 프로모션에 맞춘 맞춤형 제품을 제안하여 판매 촉진을 도모해야 합니다. 또한, 가격 인상에 따른 소비자 반응을 면밀히 분석하여 적절한 대응 방안을 마련해야 합니다.",
+        "priority": "A"
+      }
+    },
+    "financial_comment": "오뚜기, 삼양식품, 농심의 2026년 1분기 재무 성과를 분석한 결과, 세 회사 모두 매출과 영업이익이 증가세를 보이고 있습니다. 특히 삼양식품은 매출이 전기 대비 크게 증가하며 영업이익도 가장 높은 성과를 기록했습니다. 이는 발주 여력이 크다는 것을 의미합니다. 농심은 안정적인 성장을 보이며, 오뚜기는 지속적인 이익 증가로 신뢰할 수 있는 거래처입니다. 팔도는 재무 데이터가 없어 평가가 어렵지만, 나머지 세 회사에 비해 우선순위가 낮을 것으로 판단됩니다. 따라서, 삼양식품을 최우선으로 하고, 오뚜기와 농심을 그 뒤로 두는 전략이 바람직할 것입니다.",
+    "news_analysis": {
+      "오뚜기": {
+        "summary": "오뚜기가 원재료와 포장재 가격 상승, 고환율로 인해 컵라면과 만두 일부 제품의 출고가를 인상하기로 결정했다. 9월 7일부터 컵라면은 평균 6.7%, 만두는 7.7% 인상된다. 봉지라면은 가격 동결을 유지하여 소비자 부담을 최소화할 예정이다.",
+        "sentiment": "부정",
+        "impact": "이번 가격 인상은 거래처의 판매 가격에 직접적인 영향을 미칠 수 있으며, 소비자 수요 감소로 이어질 가능성이 있다. 특히, 봉지라면의 가격 동결로 인해 경쟁사와의 가격 경쟁에서 우위를 점할 수 있는 기회가 될 수 있다.",
+        "top_issues": [
+          "원재료 및 포장재 가격 상승",
+          "고환율에 따른 원가 부담",
+          "소비자 부담 최소화를 위한 봉지라면 가격 동결"
+        ],
+        "importance": "높음"
+      },
+      "삼양식품": {
+        "summary": "삼양식품은 최근 다양한 콘텐츠와 신제품 출시로 해외 시장에서의 입지를 강화하고 있으며, 불닭볶음면의 인기를 통해 실적 개선이 기대되고 있다. 또한, 가격 동결과 IP 사업 확장을 통해 지속 가능한 성장 전략을 모색하고 있다. 그러나, EU 포장 규제와 같은 외부 환경 변화에 대한 대응도 필요하다.",
+        "sentiment": "긍정",
+        "impact": "삼양식품의 해외 시장에서의 성장은 B2B 거래처에 긍정적인 영향을 미칠 것으로 예상된다. 특히, 불닭볶음면의 인기가 높아짐에 따라 관련 제품의 수요가 증가할 것으로 보인다. 따라서, 종이용기와 같은 포장재 공급업체에게도 기회가 될 수 있다.",
+        "top_issues": [
+          "불닭볶음면의 해외 인기 증가",
+          "EU 포장 규제 대응",
+          "IP 사업 확장"
+        ],
+        "importance": "높음"
+      },
+      "농심": {
+        "summary": "농심은 최근 43개 브랜드의 출고가를 평균 5.8% 인상하며 가격 조정이 이어지고 있다. 또한, 농심천심 운동을 통해 농촌 활력화에 기여하고 있으며, 다양한 사회적 활동을 통해 브랜드 이미지를 강화하고 있다. 그러나 폭염과 가뭄으로 인한 농업 피해가 심각해 농심의 원자재 조달에 부정적인 영향을 미칠 수 있다.",
+        "sentiment": "부정",
+        "impact": "농심의 가격 인상은 거래처의 원가 부담을 증가시킬 수 있으며, 소비자들의 구매력 저하로 이어질 가능성이 있다. 또한, 농촌의 가뭄과 폭염으로 인해 원자재 공급에 차질이 생길 경우, 생산 및 유통에 부정적인 영향을 미칠 수 있다.",
+        "top_issues": [
+          "가격 인상",
+          "농촌 활력화 운동",
+          "가뭄 및 폭염으로 인한 농업 피해"
+        ],
+        "importance": "높음"
+      },
+      "팔도": {
+        "summary": "팔도는 최근 베트남에서 라면 사업에 집중하며 성과를 내고 있으며, 국내 시장에서도 AI 추천에서 높은 점유율을 기록하고 있다. 또한, 다양한 마케팅 전략을 통해 소비자와의 접점을 늘리고 있으며, 여름 시즌을 맞아 이벤트와 프로모션을 진행하고 있다. 그러나 원가 상승에 따른 가격 인상과 할인 행사로 소비자 반응을 주의 깊게 살펴봐야 한다.",
+        "sentiment": "긍정",
+        "impact": "팔도의 베트남 시장 집중은 해외 매출 증가에 기여할 것으로 보이며, 국내에서의 AI 추천 점유율 상승은 브랜드 인지도 향상에 긍정적인 영향을 미칠 것이다. 여름 시즌 이벤트와 프로모션은 소비자 참여를 유도하고 판매 증가에 기여할 가능성이 높다.",
+        "top_issues": [
+          "베트남 시장에서의 라면 집중 전략",
+          "AI 추천에서의 높은 점유율",
+          "여름 시즌 프로모션 및 이벤트"
+        ],
+        "importance": "높음"
+      }
+    },
+    "disclosure_analysis": {
+      "오뚜기": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      },
+      "삼양식품": {
+        "summary": "삼양식품은 2026년 8월 12일 기준으로 주주명부를 폐쇄하고 현금 및 현물 배당을 결정하였습니다. 이번 배당 결정은 주주들에게 안정적인 수익을 제공하고, 기업의 신뢰도를 높이는 데 기여할 것으로 보입니다. 또한, 주주명부 폐쇄는 배당 지급을 위한 필수 절차로, 주주들에게 중요한 일정입니다.",
+        "impact": "이번 배당 결정은 삼양식품의 재무 구조에 긍정적인 영향을 미칠 것으로 예상됩니다. 주주들에게 배당을 통해 이익을 환원함으로써 기업의 신뢰도를 높이고, 주식의 매력도를 증가시킬 수 있습니다. 이는 장기적으로 기업의 주가에도 긍정적인 영향을 미칠 수 있습니다.",
+        "grade": "상",
+        "special_notes": "이번 배당은 현금과 현물로 나뉘어 지급될 예정이며, 주주명부 폐쇄는 배당 지급을 위한 필수 절차입니다."
+      },
+      "농심": {
+        "summary": "농심은 최근 공시를 통해 지급수단별 및 지급기간별 지급금액에 대한 정보를 공개하였습니다. 이 자료는 농심의 재무 상태와 지급 관련 분쟁 조정 기구에 대한 사항을 포함하고 있습니다. 이를 통해 투자자들은 농심의 지급 능력과 관련된 중요한 정보를 파악할 수 있습니다.",
+        "impact": "이번 공시는 농심의 재무 건전성을 평가하는 데 중요한 영향을 미칠 수 있습니다. 지급금액의 변동은 회사의 현금 흐름에 직접적인 영향을 미치며, 이는 경영 전략 및 투자자 신뢰도에도 영향을 줄 수 있습니다.",
+        "grade": "중",
+        "special_notes": "이번 공시는 지급 관련 분쟁 조정 기구에 대한 정보도 포함되어 있어, 향후 분쟁 발생 시 대처 방안에 대한 이해를 돕는 자료가 될 수 있습니다."
+      },
+      "팔도": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      }
+    },
+    "news": {
+      "오뚜기": [
+        {
+          "title": "오뚜기, 컵라면·만두 일부 출고가 인상",
+          "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=662367",
+          "pubDate": "2026-08-13T15:18:00+09:00"
+        },
+        {
+          "title": "다시 문 연 홈플러스…고객들 몰렸지만 신뢰회복이 '관건' [현장에서]",
+          "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=203503",
+          "pubDate": "2026-08-13T15:04:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 가격 올린다…봉지라면은 '동결'",
+          "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=608389",
+          "pubDate": "2026-08-13T14:58:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면 6.7%·만두 7.7% 올린다…\"9월 7일 대형마트부터\"",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=477122",
+          "pubDate": "2026-08-13T14:54:00+09:00"
+        },
+        {
+          "title": "오뚜기, 진라면 컵라면 1200원→1300원...만두도 오른다",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=223973",
+          "pubDate": "2026-08-13T14:54:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 일부 제품 가격 조정…봉지라면 전 품목은 동결",
+          "link": "https://www.e-science.co.kr/news/articleView.html?idxno=133520",
+          "pubDate": "2026-08-13T14:50:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 가격 올린다... \"원가 부담으로 인상 불가피\"",
+          "link": "https://www.getnews.co.kr/news/articleView.html?idxno=877847",
+          "pubDate": "2026-08-13T14:40:00+09:00"
+        },
+        {
+          "title": "방한 외래객 2000만 시대…K푸드 '외국인 특수' 잡는다",
+          "link": "https://n.news.naver.com/mnews/article/031/0001049499?sid=101",
+          "pubDate": "2026-08-13T14:38:00+09:00"
+        },
+        {
+          "title": "오뚜기, 9월부터 컵라면·만두 가격 올린다…인상 품목 최소화",
+          "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=128245",
+          "pubDate": "2026-08-13T14:38:00+09:00"
+        },
+        {
+          "title": "오뚜기 컵라면·만두 가격 인상…내달 7일부터 6.7%·7.7%↑",
+          "link": "https://www.ppss.kr/news/articleView.html?idxno=305359",
+          "pubDate": "2026-08-13T14:38:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 가격 인상…진라면 용기 1200→1300원",
+          "link": "https://n.news.naver.com/mnews/article/374/0000527312?sid=103",
+          "pubDate": "2026-08-13T14:33:00+09:00"
+        },
+        {
+          "title": "오뚜기, 내달 7일부터 컵라면·만두값 올린다…봉지라면은 동결",
+          "link": "https://sateconomy.co.kr/news/view/1065588763309877",
+          "pubDate": "2026-08-13T14:26:00+09:00"
+        },
+        {
+          "title": "대상웰라이프, 독거노인에 영양식 전하며 온정… 오뚜기, 원가 압박에 ...",
+          "link": "https://www.newstnt.com/news/articleView.html?idxno=713847",
+          "pubDate": "2026-08-13T14:24:00+09:00"
+        },
+        {
+          "title": "베트남서 팔도 웃고 오뚜기 주춤한 이유…\"라면 집중 vs 종합식품 다각...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43808",
+          "pubDate": "2026-08-13T14:14:00+09:00"
+        },
+        {
+          "title": "오뚜기, '스위트홈 푸드 에세이 공모전' 개최…가족·음식 이야기 공모",
+          "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5050944",
+          "pubDate": "2026-08-13T14:10:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두값 최대 7.7% 인상···정부 물가안정 요청 무색",
+          "link": "http://www.koreastocknews.com/news/articleView.html?idxno=120555",
+          "pubDate": "2026-08-13T14:04:00+09:00"
+        },
+        {
+          "title": "오뚜기, 원가 상승 부담에 컵라면·만두 일부 출고가 인상",
+          "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=2243",
+          "pubDate": "2026-08-13T13:52:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 가격 올린다…진라면 용기 1200→1300원",
+          "link": "https://www.etoday.co.kr/news/view/2614181",
+          "pubDate": "2026-08-13T13:38:00+09:00"
+        },
+        {
+          "title": "장바구니 물가 또 들썩…오뚜기·풀무원·삼립 줄인상",
+          "link": "https://n.news.naver.com/mnews/article/586/0000135875?sid=101",
+          "pubDate": "2026-08-13T13:27:00+09:00"
+        },
+        {
+          "title": "오뚜기, '원가 부담 누적' 컵라면·만두 가격 줄인상…한 달 새 벌써 3번...",
+          "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000056513",
+          "pubDate": "2026-08-13T13:03:00+09:00"
+        },
+        {
+          "title": "[식음료 Pick] 친환경 패키지·가격 조정·폭염 나눔 활동 전개",
+          "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=206510",
+          "pubDate": "2026-08-13T12:30:00+09:00"
+        }
+      ],
+      "삼양식품": [
+        {
+          "title": "삼양라운드스퀘어 '번트(BURNT)' 오리지널 시리즈 2편 공개···\"콘텐츠...",
+          "link": "https://www.ngonews.kr/news/articleView.html?idxno=235422",
+          "pubDate": "2026-08-13T14:56:00+09:00"
+        },
+        {
+          "title": "방한 외래객 2000만 시대…K푸드 '외국인 특수' 잡는다",
+          "link": "https://n.news.naver.com/mnews/article/031/0001049499?sid=101",
+          "pubDate": "2026-08-13T14:38:00+09:00"
+        },
+        {
+          "title": "삼양, '스와이시 불닭' 日서 먼저 판다…18일 패밀리마트 출격",
+          "link": "https://www.theguru.co.kr/news/article.html?no=105751",
+          "pubDate": "2026-08-13T09:12:00+09:00"
+        },
+        {
+          "title": "8월 12일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=127279",
+          "pubDate": "2026-08-13T08:49:00+09:00"
+        },
+        {
+          "title": "가격 인상 행렬 속 홀로 동결…삼양식품, 해외가 버팀목",
+          "link": "http://www.datanews.co.kr/news/article.html?no=145994",
+          "pubDate": "2026-08-13T08:36:00+09:00"
+        },
+        {
+          "title": "100억개 팔린 불닭, '페포' 입는다…IP 판 키우는 삼양식품",
+          "link": "https://www.cstimes.com/news/articleView.html?idxno=716577",
+          "pubDate": "2026-08-13T07:54:00+09:00"
+        },
+        {
+          "title": "종이로 바꾸고 복합포장 줄이고⋯ EU 포장 규제에 바빠진 기업들",
+          "link": "https://www.viva100.com/article/20260812500950",
+          "pubDate": "2026-08-13T06:02:00+09:00"
+        },
+        {
+          "title": "[현대에 생겨난 한식 요리는? ①] 한국전쟁 직후 생겨난 요리 '부대찌개...",
+          "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=450575",
+          "pubDate": "2026-08-13T02:42:00+09:00"
+        },
+        {
+          "title": "“수출만이 살길”… 불닭·초코파이 K푸드 기업 2분기 실적 ‘맑음’",
+          "link": "https://n.news.naver.com/mnews/article/005/0001866586?sid=101",
+          "pubDate": "2026-08-13T02:07:00+09:00"
+        },
+        {
+          "title": "[주요공시] 케이씨텍, 파두, 두산퓨얼셀, 씨메스로보틱스, LG에너지솔루...",
+          "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=207741",
+          "pubDate": "2026-08-12T17:54:00+09:00"
+        },
+        {
+          "title": "“수출이 곧 실적” 불닭·초코파이 훈풍에 K푸드 2분기 ‘웃고 울었다...",
+          "link": "https://n.news.naver.com/mnews/article/005/0001866497?sid=101",
+          "pubDate": "2026-08-12T17:24:00+09:00"
+        },
+        {
+          "title": "AI가 바꾸는 식품업계…'맛·품질·원가' 모두 혁신",
+          "link": "https://www.businessplus.kr/news/articleView.html?idxno=115397",
+          "pubDate": "2026-08-12T17:22:00+09:00"
+        },
+        {
+          "title": "'페포' 내건 삼양식품…IP로 '불닭' 새 지평 연다",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=747813",
+          "pubDate": "2026-08-12T17:10:00+09:00"
+        },
+        {
+          "title": "[코스피 지수선물 옵션] AI·전력 인프라에 돈 몰렸다…삼성전자·SK하이...",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=476791",
+          "pubDate": "2026-08-12T16:42:00+09:00"
+        },
+        {
+          "title": "[식품업계 7월 동향] 삼양식품, 신제품 '짜르르' 출시·명동사옥 페포라...",
+          "link": "http://www.wsobi.com/news/articleView.html?idxno=316401",
+          "pubDate": "2026-08-12T16:18:00+09:00"
+        },
+        {
+          "title": "삼양식품 주가, 8월 12일 1,204,000원 3.99% 하락 마감",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16161685",
+          "pubDate": "2026-08-12T16:14:00+09:00"
+        },
+        {
+          "title": "삼전·닉스 '뛰자', 코스피 '급등'...삼성바이오·셀트리온은 '뚝'",
+          "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=169732",
+          "pubDate": "2026-08-12T16:14:00+09:00"
+        },
+        {
+          "title": "삼양식품, 주당 3200원 현금배당 결정",
+          "link": "https://n.news.naver.com/mnews/article/016/0002683039?sid=101",
+          "pubDate": "2026-08-12T16:12:00+09:00"
+        },
+        {
+          "title": "[거래소 기관] 개인 던질때 산다... SK하이닉스 삼성전자 삼성전기 LG전...",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=476760",
+          "pubDate": "2026-08-12T16:04:00+09:00"
+        },
+        {
+          "title": "36년 만에 되살린 '우지'···삼양식품, 봉지면에서 짜장까지 '확장'",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=259028",
+          "pubDate": "2026-08-12T14:44:00+09:00"
+        },
+        {
+          "title": "같은 고물가·고환율인데… '해외'가 가른 식품업계 성적표",
+          "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=726099",
+          "pubDate": "2026-08-12T12:12:00+09:00"
+        },
+        {
+          "title": "<21> 왜 한류는 세계인의 마음을 훔치는가 [신화에서 선민까지 한민족 ...",
+          "link": "https://n.news.naver.com/mnews/article/022/0004150345?sid=103",
+          "pubDate": "2026-08-12T10:13:00+09:00"
+        },
+        {
+          "title": "\"美 입맛 꽉 잡았다\"…농심 사발면·삼양 불닭, '최고의 라면' 톱5",
+          "link": "https://www.theguru.co.kr/news/article.html?no=105688",
+          "pubDate": "2026-08-12T08:44:00+09:00"
+        },
+        {
+          "title": "친환경 규제에 유럽 수출길 막힐라…EU 포장재 규정 강화, 긴장하는 K라...",
+          "link": "https://n.news.naver.com/mnews/article/277/0005801806?sid=103",
+          "pubDate": "2026-08-12T07:10:00+09:00"
+        },
+        {
+          "title": "[브랜드스토리] 57년 '부전상립'의 오뚜기 뚝심 경영… 年매출 '3조 클럽...",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608111033473510551",
+          "pubDate": "2026-08-12T05:20:00+09:00"
+        },
+        {
+          "title": "안에선 울고, 밖에선 웃고… K푸드 '희비'",
+          "link": "https://n.news.naver.com/mnews/article/008/0005398679?sid=101",
+          "pubDate": "2026-08-12T03:00:00+09:00"
+        },
+        {
+          "title": "생성형 AI 속 라면 점수 97.5%가 ‘빅4’…후발 브랜드는 왜 안 보였나",
+          "link": "https://www.venturesquare.net/1105404/",
+          "pubDate": "2026-08-11T23:46:00+09:00"
+        },
+        {
+          "title": "[방한 필수코스 K푸드] 사옥 열고 치킨 직접 튀기고…식품업계, 외국인...",
+          "link": "https://www.ajunews.com/view/20260811145925820",
+          "pubDate": "2026-08-11T18:58:00+09:00"
+        },
+        {
+          "title": "“라면 뭐가 좋아?” AI에 물었더니…추천 97.5%가 ‘라면 4사’ 제품",
+          "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065598879938224",
+          "pubDate": "2026-08-11T16:42:00+09:00"
+        },
+        {
+          "title": "AI가 추천하는 라면도 '4강 체제'…농심·오뚜기·삼양·팔도 점유율 97...",
+          "link": "http://www.newsworker.co.kr/news/articleView.html?idxno=440708",
+          "pubDate": "2026-08-11T15:54:00+09:00"
+        },
+        {
+          "title": "삼양식품 '불닭' 김정수 회장, 여성 CEO 1위 탈환",
+          "link": "https://www.newscj.com/news/articleView.html?idxno=3424208",
+          "pubDate": "2026-08-11T15:50:00+09:00"
+        },
+        {
+          "title": "\"AI야, 라면 추천해줘\"…빅4, 점유율 '97.5%' 싹쓸이",
+          "link": "http://www.metroseoul.co.kr/article/20260811500369",
+          "pubDate": "2026-08-11T15:44:00+09:00"
+        },
+        {
+          "title": "\"라면 회사 아니라니까요\"…삼양사, 스페셜티 기업으로 존재감 키운다",
+          "link": "https://n.news.naver.com/mnews/article/138/0002237423?sid=101",
+          "pubDate": "2026-08-11T15:43:00+09:00"
+        }
+      ],
+      "농심": [
+        {
+          "title": "청량농협·울산성남동지점, 농협 최고 영예 '총화상' 수상",
+          "link": "https://n.news.naver.com/mnews/article/079/0004178505?sid=102",
+          "pubDate": "2026-08-13T15:22:00+09:00"
+        },
+        {
+          "title": "메가마트, 라하브라에 남가주 첫 매장 오픈한다",
+          "link": "http://www.koreatimes.com/article/1625405",
+          "pubDate": "2026-08-13T15:20:00+09:00"
+        },
+        {
+          "title": "[기획] 은행권, 변동성 장세·금리 인상에 '수신 경쟁' 치열",
+          "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=662368",
+          "pubDate": "2026-08-13T15:18:00+09:00"
+        },
+        {
+          "title": "진주시농민회 \"가뭄·폭염 겪는 경남을 특별재난지역 지정 촉구\"",
+          "link": "https://n.news.naver.com/mnews/article/003/0014126169?sid=102",
+          "pubDate": "2026-08-13T15:10:00+09:00"
+        },
+        {
+          "title": "다시 문 연 홈플러스…고객들 몰렸지만 신뢰회복이 '관건' [현장에서]",
+          "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=203503",
+          "pubDate": "2026-08-13T15:04:00+09:00"
+        },
+        {
+          "title": "[VCT 프리뷰] 농심·T1·DRX, 플레이-인 스테이지서 챔피언스 상하이행 ...",
+          "link": "https://m.sports.naver.com/esports/article/109/0005587775",
+          "pubDate": "2026-08-13T14:58:00+09:00"
+        },
+        {
+          "title": "오뚜기, 진라면 컵라면 1200원→1300원...만두도 오른다",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=223973",
+          "pubDate": "2026-08-13T14:54:00+09:00"
+        },
+        {
+          "title": "[기획] 재료비·임차료·인건비 '동시 상승'… 소상공인 마진 압박",
+          "link": "https://www.m-i.kr/news/articleView.html?idxno=1402100",
+          "pubDate": "2026-08-13T14:46:00+09:00"
+        },
+        {
+          "title": "방한 외래객 2000만 시대…K푸드 '외국인 특수' 잡는다",
+          "link": "https://n.news.naver.com/mnews/article/031/0001049499?sid=101",
+          "pubDate": "2026-08-13T14:38:00+09:00"
+        },
+        {
+          "title": "중앙대, 안성 농촌서 '농심천심 봉사단' 활동…지역 상생 도모",
+          "link": "https://n.news.naver.com/mnews/article/003/0014125950?sid=102",
+          "pubDate": "2026-08-13T14:32:00+09:00"
+        },
+        {
+          "title": "오뚜기, 내달 7일부터 컵라면·만두값 올린다…봉지라면은 동결",
+          "link": "https://sateconomy.co.kr/news/view/1065588763309877",
+          "pubDate": "2026-08-13T14:26:00+09:00"
+        },
+        {
+          "title": "농협, 농촌 활력 포털 ‘농심N천심’ 대국민 캠페인",
+          "link": "https://www.kenews.co.kr/news/article.html?no=89868",
+          "pubDate": "2026-08-13T14:22:00+09:00"
+        },
+        {
+          "title": "진주시농민회 \"지난해 수해 이어 올해는 극심한 가뭄\"…타들어가는 농심",
+          "link": "http://www.dandinews.com/news/articleView.html?idxno=17328",
+          "pubDate": "2026-08-13T14:20:00+09:00"
+        },
+        {
+          "title": "[함양소식]군, 벼 신품종 '경원벼' 현장평가회 개최 등",
+          "link": "https://n.news.naver.com/mnews/article/003/0014125826?sid=102",
+          "pubDate": "2026-08-13T14:18:00+09:00"
+        },
+        {
+          "title": "칠곡군, 특별교부세 등 6억 원 긴급 투입 가뭄 총력전",
+          "link": "https://www.dkilbo.com/news/articleView.html?idxno=551280",
+          "pubDate": "2026-08-13T14:16:00+09:00"
+        },
+        {
+          "title": "폭염에 시든 6년근 인삼…타들어 가는 농심(農心)",
+          "link": "https://n.news.naver.com/mnews/article/421/0009112454?sid=102",
+          "pubDate": "2026-08-13T14:13:00+09:00"
+        },
+        {
+          "title": "\"일손 돕고 스미싱 예방까지\" 중앙대 대학생 봉사단, 안성 농가서 맞춤...",
+          "link": "https://www.newstnt.com/news/articleView.html?idxno=713845",
+          "pubDate": "2026-08-13T14:10:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두값 최대 7.7% 인상···정부 물가안정 요청 무색",
+          "link": "http://www.koreastocknews.com/news/articleView.html?idxno=120555",
+          "pubDate": "2026-08-13T14:04:00+09:00"
+        },
+        {
+          "title": "[르포] 한 달 만에 정식 개장한 홈플러스… 인파 몰렸지만 매대 곳곳엔...",
+          "link": "https://n.news.naver.com/mnews/article/366/0001186046?sid=101",
+          "pubDate": "2026-08-13T14:01:00+09:00"
+        },
+        {
+          "title": "NH농협 부천시지부, 말복 맞아 어르신 보양식 나눔",
+          "link": "https://www.kgnews.co.kr/news/article.html?no=907677",
+          "pubDate": "2026-08-13T13:54:00+09:00"
+        },
+        {
+          "title": "장바구니 물가 또 들썩…오뚜기·풀무원·삼립 줄인상",
+          "link": "https://n.news.naver.com/mnews/article/586/0000135875?sid=101",
+          "pubDate": "2026-08-13T13:27:00+09:00"
+        },
+        {
+          "title": "[르포] \"정상화 기대감에 오픈런까지\"…홈플러스, 63개 매장 공식 재오...",
+          "link": "https://www.youthdaily.co.kr/news/article.html?no=225074",
+          "pubDate": "2026-08-13T12:44:00+09:00"
+        },
+        {
+          "title": "컵라면·새우깡·빵...식품업계 가격 줄줄이 인상",
+          "link": "https://www.hidomin.com/news/articleView.html?idxno=717136",
+          "pubDate": "2026-08-13T11:44:00+09:00"
+        },
+        {
+          "title": "\"오뚜기도 가격 올린다\"…진라면 컵 1200→1300원",
+          "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=363768",
+          "pubDate": "2026-08-13T11:42:00+09:00"
+        },
+        {
+          "title": "“원가 부담 지속”…컵라면·만두 가격 오른다",
+          "link": "https://n.news.naver.com/mnews/article/009/0005720494?sid=103",
+          "pubDate": "2026-08-13T11:24:00+09:00"
+        },
+        {
+          "title": "\"차라리 한 번에 올리지\"…한 달 새 세 번 가격 올린 오뚜기",
+          "link": "http://www.newsworker.co.kr/news/articleView.html?idxno=441036",
+          "pubDate": "2026-08-13T11:08:00+09:00"
+        },
+        {
+          "title": "카레·식자재 이어 컵라면까지…오뚜기, ‘릴레이 가격 인상’",
+          "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/08/13/2026081380058.html",
+          "pubDate": "2026-08-13T11:06:00+09:00"
+        },
+        {
+          "title": "오뚜기, 컵라면·만두 일부 출고가 조정…\"원가 부담 지속\"",
+          "link": "https://www.cnbizm.com/news/articleView.html?idxno=311460",
+          "pubDate": "2026-08-13T10:56:00+09:00"
+        },
+        {
+          "title": "\"라면부터 빵까지 가격표 줄줄이 바뀐다\"…적신호 켜진 식탁물가",
+          "link": "https://www.seoultimes.news/news/article.html?no=2000098765",
+          "pubDate": "2026-08-13T10:50:00+09:00"
+        },
+        {
+          "title": "카레·케첩 이어 컵라면·만두도…오뚜기, '가격표' 또 바꾼다",
+          "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1720245",
+          "pubDate": "2026-08-13T10:46:00+09:00"
+        },
+        {
+          "title": "오뚜기도 컵라면값 올린다⋯식품업계 가격 인상 '도미노'",
+          "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=546606",
+          "pubDate": "2026-08-13T10:38:00+09:00"
+        },
+        {
+          "title": "진라면·새우깡·만두 가격 오른다…식품업계 가격 인상 잇따라",
+          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092168045",
+          "pubDate": "2026-08-13T10:32:00+09:00"
+        },
+        {
+          "title": "오뚜기, 매출 비중 60% 차지하는 봉지라면 가격 동결...컵라면·만두 일...",
+          "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=761393",
+          "pubDate": "2026-08-13T10:30:00+09:00"
+        },
+        {
+          "title": "컵라면·만두·빵 가격 오른다...오뚜기·풀무원·삼립 줄인상",
+          "link": "https://n.news.naver.com/mnews/article/666/0000119008?sid=101",
+          "pubDate": "2026-08-13T10:21:00+09:00"
+        },
+        {
+          "title": "\"일본 여행 때 사오던 라면\"…농심 삼계탕사발면 10분 만에 품절",
+          "link": "https://www.newscj.com/news/articleView.html?idxno=3424718",
+          "pubDate": "2026-08-13T10:18:00+09:00"
+        }
+      ],
+      "팔도": [
+        {
+          "title": "다시 문 연 홈플러스…고객들 몰렸지만 신뢰회복이 '관건' [현장에서]",
+          "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=203503",
+          "pubDate": "2026-08-13T15:04:00+09:00"
+        },
+        {
+          "title": "베트남서 팔도 웃고 오뚜기 주춤한 이유…\"라면 집중 vs 종합식품 다각...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43808",
+          "pubDate": "2026-08-13T14:14:00+09:00"
+        },
+        {
+          "title": "휴가철 알뜰 먹거리 마련…8월 한달 '가공식품 최대 57%↓'",
+          "link": "https://www.korea.kr/news/reporterView.do?newsId=148969821&call_from=naver_news",
+          "pubDate": "2026-08-12T13:17:00+09:00"
+        },
+        {
+          "title": "[방한 필수코스 K푸드] 외국인 관광객 1000만명 시대…K푸드, 방한 소비...",
+          "link": "https://www.ajunews.com/view/20260811135040505",
+          "pubDate": "2026-08-12T08:02:00+09:00"
+        },
+        {
+          "title": "울산웨일즈, 폭염 날릴 'COOL한' 홈 3연전",
+          "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1064331",
+          "pubDate": "2026-08-12T00:02:00+09:00"
+        },
+        {
+          "title": "생성형 AI 속 라면 점수 97.5%가 ‘빅4’…후발 브랜드는 왜 안 보였나",
+          "link": "https://www.venturesquare.net/1105404/",
+          "pubDate": "2026-08-11T23:46:00+09:00"
+        },
+        {
+          "title": "더 뜻깊게 더 재밌게 돌아온 울산웨일즈",
+          "link": "https://www.ulsanpress.net/news/articleView.html?idxno=580824",
+          "pubDate": "2026-08-11T21:42:00+09:00"
+        },
+        {
+          "title": "울산웨일즈, 무더위 시원하게 날릴 '야구 축제'",
+          "link": "http://www.ujeil.com/news/articleView.html?idxno=390202",
+          "pubDate": "2026-08-11T20:50:00+09:00"
+        },
+        {
+          "title": "“라면 뭐가 좋아?” AI에 물었더니…추천 97.5%가 ‘라면 4사’ 제품",
+          "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065598879938224",
+          "pubDate": "2026-08-11T16:42:00+09:00"
+        },
+        {
+          "title": "AI가 추천하는 라면도 '4강 체제'…농심·오뚜기·삼양·팔도 점유율 97...",
+          "link": "http://www.newsworker.co.kr/news/articleView.html?idxno=440708",
+          "pubDate": "2026-08-11T15:54:00+09:00"
+        },
+        {
+          "title": "울산 웨일즈, 15일부터 열리는 한화 홈 3연전서 여름 특별행사 개최 \"다...",
+          "link": "https://m.sports.naver.com/kbaseball/article/108/0003461059",
+          "pubDate": "2026-08-11T15:47:00+09:00"
+        },
+        {
+          "title": "\"AI야, 라면 추천해줘\"…빅4, 점유율 '97.5%' 싹쓸이",
+          "link": "http://www.metroseoul.co.kr/article/20260811500369",
+          "pubDate": "2026-08-11T15:44:00+09:00"
+        },
+        {
+          "title": "챗GPT는 신라면, 제미나이는 육개장…AI별 엇갈린 선호도",
+          "link": "https://n.news.naver.com/mnews/article/082/0001393433?sid=101",
+          "pubDate": "2026-08-11T15:10:00+09:00"
+        },
+        {
+          "title": "[카드] AI 추천 라면의 97.5%가 라면 4사…농심·오뚜기 등",
+          "link": "http://www.newsprime.co.kr/news/article.html?no=743487",
+          "pubDate": "2026-08-11T14:28:00+09:00"
+        },
+        {
+          "title": "AI가 고른 라면도 '빅4' 쏠림… 후발 브랜드, 생성형 AI서 존재감 희미",
+          "link": "https://www.pressman.kr/news/articleView.html?idxno=103114",
+          "pubDate": "2026-08-11T14:26:00+09:00"
+        },
+        {
+          "title": "여름아, 부탁해! ‘시원한 이벤트 와르르’ 울산 웨일즈, 15~17일 한화전...",
+          "link": "https://m.sports.naver.com/kbaseball/article/468/0001259131",
+          "pubDate": "2026-08-11T14:26:00+09:00"
+        },
+        {
+          "title": "에이아이빅스랩 \"라면 4사, AI 응답 점유율 97.5% 차지\"",
+          "link": "http://www.newsdream.kr/news/articleView.html?idxno=116058",
+          "pubDate": "2026-08-11T14:10:00+09:00"
+        },
+        {
+          "title": "AI에게 “라면 추천해줘” 했더니…농심·오뚜기 등 ‘라면 4사’가 97....",
+          "link": "https://n.news.naver.com/mnews/article/117/0004093717?sid=102",
+          "pubDate": "2026-08-11T13:23:00+09:00"
+        },
+        {
+          "title": "라면 4사, AI 응답 점유율 97.5%···후발 브랜드 진입장벽 높아져",
+          "link": "https://www.ziksir.com/news/articleView.html?idxno=142795",
+          "pubDate": "2026-08-11T12:26:00+09:00"
+        },
+        {
+          "title": "생성형 AI가 추천한 라면 97.5%가 ‘라면 4사’ 제품…“후발 브랜드, A...",
+          "link": "https://www.hinews.co.kr/view.php?ud=202608111211552883cd8b879b3c_48",
+          "pubDate": "2026-08-11T12:16:00+09:00"
+        },
+        {
+          "title": "\"물 붓는 면 대신 냄비 라면으로 승부\"…베트남서 1,400억 원 쓸어담은 ...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43782",
+          "pubDate": "2026-08-11T11:10:00+09:00"
+        },
+        {
+          "title": "\"미국 날고 베트남 삐끗\"…'해외매출 10% 갇힌' 오뚜기, 2030년 글로벌 1...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43761",
+          "pubDate": "2026-08-10T16:12:00+09:00"
+        },
+        {
+          "title": "대형마트 휴무일, 이마트·롯데마트·홈플러스·코스트코 ‘추석선물 예...",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202608060215",
+          "pubDate": "2026-08-09T00:02:00+09:00"
+        },
+        {
+          "title": "야구 팬심 저격하는 패션업계, 구단 협업 신상품 ‘봇물’",
+          "link": "https://www.ekn.kr/web/view.php?key=20260808028390803",
+          "pubDate": "2026-08-08T09:22:00+09:00"
+        },
+        {
+          "title": "제주 청귤 커피부터 ‘리니지 왕뚜껑’까지…유통업계 이색 신제품",
+          "link": "https://n.news.naver.com/mnews/article/022/0004149320?sid=101",
+          "pubDate": "2026-08-08T07:31:00+09:00"
+        },
+        {
+          "title": "가격은 올리고 할인은 늘리고…식품업계, 원가 부담 속 '투트랙 전략'",
+          "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=314457",
+          "pubDate": "2026-08-08T02:40:00+09:00"
+        },
+        {
+          "title": "유니폼 넘어 키보드까지...유통가, 1000만 야구 팬심에 '승부구'",
+          "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=251895",
+          "pubDate": "2026-08-07T14:38:00+09:00"
+        },
+        {
+          "title": "SSG닷컴, 쓱7클럽 회원 대상 장보기 행사 운영",
+          "link": "http://www.lawissue.co.kr/view.php?ud=202608061836478645204ead0791_12",
+          "pubDate": "2026-08-06T18:38:00+09:00"
+        },
+        {
+          "title": "[오늘의 커머스] CJ온스타일·GS샵·SSG닷컴",
+          "link": "http://www.financialreview.co.kr/news/articleView.html?idxno=44053",
+          "pubDate": "2026-08-06T17:36:00+09:00"
+        }
+      ]
+    },
+    "disclosures": {
+      "오뚜기": [],
+      "삼양식품": [
+        {
+          "report_nm": "현금ㆍ현물배당을위한주주명부폐쇄(기준일)결정              ",
+          "rcept_dt": "20260812",
+          "rcept_no": "20260812800669",
+          "corp_name": "삼양식품"
+        },
+        {
+          "report_nm": "현금ㆍ현물배당결정              ",
+          "rcept_dt": "20260812",
+          "rcept_no": "20260812800659",
+          "corp_name": "삼양식품"
+        }
+      ],
+      "농심": [
+        {
+          "report_nm": "지급수단별ㆍ지급기간별지급금액및분쟁조정기구에관한사항",
+          "rcept_dt": "20260813",
+          "rcept_no": "20260813000691",
+          "corp_name": "농심"
+        }
+      ],
+      "팔도": []
+    }
+  }
+}
