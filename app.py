@@ -532,7 +532,7 @@ if page == "📊 리포트 생성":
                     # ── 섹션 3: 오뚜기라면 관련 뉴스 ──
                     st.markdown("#### 3. 오뚜기라면 관련 뉴스")
                     all_ottogi_news = data.get("news", {}).get("오뚜기", [])
-                    _ramen_keywords = ["오뚜기라면", "오뚜기 라면"]
+                    _ramen_keywords = ["오뚜기라면", "오뚜기 라면", "컵라면", "봉지라면", "진라면"]
                     ramen_news = [
                         item for item in all_ottogi_news
                         if any(
