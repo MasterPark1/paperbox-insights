@@ -192,7 +192,7 @@ with st.sidebar:
 
     # ── 이전 리포트 불러오기 ──
     st.divider()
-    st.markdown('<div style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:6px">📂 이전 리포트 불러오기</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:6px">📂 이전 리포트 불러오기</div>', unsafe_allow_html=True)
 
     if "snapshots_loaded" not in st.session_state:
         st.session_state.snapshots_loaded = False
@@ -243,7 +243,6 @@ with st.sidebar:
                     else:
                         st.error(msg)
 
-            st.markdown("---")
             if "confirm_delete_all" not in st.session_state:
                 st.session_state.confirm_delete_all = False
 
