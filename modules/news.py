@@ -9,7 +9,7 @@ from email.utils import parsedate_to_datetime
 import streamlit as st
 
 COMPANIES = [
-    {"name": "오뚜기",   "dart_code": "00141529", "keywords": ["오뚜기", "오뚜기라면"]},
+    {"name": "오뚜기",   "dart_code": "00141529", "keywords": ["오뚜기", "오뚜기라면", "오뚜기 라면"]},
     {"name": "삼양식품", "dart_code": "00126955", "keywords": ["삼양식품", "삼양라면"]},
     {"name": "농심",     "dart_code": "00108241", "keywords": ["농심", "농심라면"]},
     {"name": "팔도",     "dart_code": "00227643", "keywords": ["팔도", "팔도라면"]},
