@@ -186,7 +186,7 @@ with st.sidebar:
 
     page = st.radio(
         "메뉴",
-        ["📊 리포트 생성", "📋 리포트 조회", "👥 수신자 관리", "⏱ 실행 이력", "⚙️ 설정"],
+        ["📊 리포트 생성", "📋 리포트 조회", "⏱ 실행 이력", "⚙️ 설정"],
         label_visibility="collapsed",
     )
 
@@ -769,65 +769,7 @@ elif page == "📋 리포트 조회":
         st.components.v1.html(html_content, height=800, scrolling=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 탭 3: 수신자 관리
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-elif page == "👥 수신자 관리":
-    st.markdown("## 👥 메일 수신자 관리")
-
-    # 추가 폼
-    with st.form("add_recipient_form", clear_on_submit=True):
-        st.markdown("#### 수신자 추가")
-        c1, c2, c3, c4 = st.columns([2, 3, 2, 1])
-        with c1:
-            new_name = st.text_input("이름", placeholder="홍길동")
-        with c2:
-            new_email = st.text_input("이메일", placeholder="hong@company.com")
-        with c3:
-            new_dept = st.text_input("부서", placeholder="영업팀")
-        with c4:
-            st.markdown("<br>", unsafe_allow_html=True)
-            submitted = st.form_submit_button("➕ 추가", use_container_width=True)
-
-        if submitted:
-            if not new_name or not new_email:
-                st.error("이름과 이메일은 필수입니다.")
-            elif "@" not in new_email:
-                st.error("유효한 이메일 주소를 입력하세요.")
-            else:
-                config.add_recipient(new_name, new_email, new_dept)
-                st.success(f"✅ {new_name} ({new_email}) 추가 완료")
-                st.rerun()
-
-    st.divider()
-
-    # 수신자 목록
-    recipients = config.load_recipients()
-    if not recipients:
-        st.info("등록된 수신자가 없습니다.")
-    else:
-        st.markdown(f"#### 수신자 목록 ({len(recipients)}명 / 활성: {sum(1 for r in recipients if r.get('active'))}명)")
-        header = st.columns([2, 3, 2, 1, 1])
-        for h, t in zip(header, ["이름", "이메일", "부서", "활성화", "삭제"]):
-            h.markdown(f"**{t}**")
-        st.markdown("<hr style='margin:4px 0'>", unsafe_allow_html=True)
-
-        for idx, r in enumerate(recipients):
-            col1, col2, col3, col4, col5 = st.columns([2, 3, 2, 1, 1])
-            col1.write(r.get("name", ""))
-            col2.write(r.get("email", ""))
-            col3.write(r.get("dept", ""))
-            is_active = r.get("active", True)
-            badge = '<span class="badge badge-ok">활성</span>' if is_active else '<span class="badge badge-neu">비활성</span>'
-            col4.markdown(badge, unsafe_allow_html=True)
-            if col5.button("🗑", key=f"del_{idx}_{r['email']}", help=f"{r['email']} 삭제"):
-                config.delete_recipient(r["email"])
-                st.rerun()
-            if col4.button("전환", key=f"tog_{idx}_{r['email']}", help="활성/비활성 전환"):
-                config.toggle_recipient(r["email"])
-                st.rerun()
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 탭 4: 실행 이력
+# 탭 3: 실행 이력
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif page == "⏱ 실행 이력":
     st.markdown("## ⏱ 실행 이력")
@@ -888,100 +830,149 @@ elif page == "⚙️ 설정":
 
     secrets = config.get_secrets()
 
-    # ── Naver API ──
-    with st.expander("📡 네이버 뉴스 API", expanded=True):
-        c1, c2 = st.columns(2)
-        c1.text_input("Client ID", value=secrets.get("naver_client_id", "")[:4] + "****" if secrets.get("naver_client_id") else "", disabled=True, key="cfg_naver_id")
-        c2.text_input("Client Secret", value="****" if secrets.get("naver_client_secret") else "미설정", disabled=True, key="cfg_naver_secret")
-        if st.button("🔌 네이버 API 연결 테스트", key="btn_test_naver"):
-            cid = secrets.get("naver_client_id", "")
-            csec = secrets.get("naver_client_secret", "")
-            if not cid or not csec:
-                st.error("❌ Client ID / Secret 미설정")
-            else:
-                import requests as _req
-                try:
-                    r = _req.get(
-                        "https://openapi.naver.com/v1/search/news.json",
-                        headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec},
-                        params={"query": "테스트", "display": 1},
-                        timeout=5,
-                    )
-                    if r.status_code == 200:
-                        st.success("✅ 네이버 API 연결 성공")
-                    else:
-                        st.error(f"❌ 응답 오류: {r.status_code}")
-                except Exception as e:
-                    st.error(f"❌ 연결 실패: {e}")
+    # ── 설정 하위 탭 ──
+    tab_recipients, tab_api, tab_schedule = st.tabs(["👥 수신자 관리", "🔌 API 연결 설정", "🗓 스케줄 설정"])
 
-    # ── DART API ──
-    with st.expander("📂 DART Open API"):
-        st.text_input("API Key", value="****" if secrets.get("dart_api_key") else "미설정", disabled=True, key="cfg_dart_key")
-        if st.button("🔌 DART API 연결 테스트", key="btn_test_dart"):
-            key = secrets.get("dart_api_key", "")
-            if not key:
-                st.error("❌ API Key 미설정")
-            else:
-                import requests as _req
-                try:
-                    r = _req.get(
-                        "https://opendart.fss.or.kr/api/list.json",
-                        params={"crtfc_key": key, "corp_code": "00155653", "page_count": 1},
-                        timeout=5,
-                    )
-                    res = r.json()
-                    if res.get("status") in ("000", "013"):
-                        st.success("✅ DART API 연결 성공")
-                    else:
-                        st.error(f"❌ 응답 코드: {res.get('status')} — {res.get('message','')}")
-                except Exception as e:
-                    st.error(f"❌ 연결 실패: {e}")
+    with tab_recipients:
+        st.markdown("#### 수신자 추가")
+        with st.form("add_recipient_form", clear_on_submit=True):
+            c1, c2, c3, c4 = st.columns([2, 3, 2, 1])
+            with c1:
+                new_name = st.text_input("이름", placeholder="홍길동")
+            with c2:
+                new_email = st.text_input("이메일", placeholder="hong@company.com")
+            with c3:
+                new_dept = st.text_input("부서", placeholder="영업팀")
+            with c4:
+                st.markdown("<br>", unsafe_allow_html=True)
+                submitted = st.form_submit_button("➕ 추가", use_container_width=True)
+            if submitted:
+                if not new_name or not new_email:
+                    st.error("이름과 이메일은 필수입니다.")
+                elif "@" not in new_email:
+                    st.error("유효한 이메일 주소를 입력하세요.")
+                else:
+                    config.add_recipient(new_name, new_email, new_dept)
+                    st.success(f"✅ {new_name} ({new_email}) 추가 완료")
+                    st.rerun()
 
-    # ── OpenAI ──
-    with st.expander("🤖 OpenAI API"):
-        st.text_input("API Key", value="sk-****" if secrets.get("openai_api_key") else "미설정", disabled=True, key="cfg_oai_key")
-        st.text_input("모델", value="gpt-4o-mini", disabled=True, key="cfg_oai_model")
-        if st.button("🔌 OpenAI API 연결 테스트", key="btn_test_oai"):
-            key = secrets.get("openai_api_key", "")
-            if not key:
-                st.error("❌ API Key 미설정")
-            else:
-                try:
-                    from openai import OpenAI as _OAI
-                    client = _OAI(api_key=key)
-                    resp = client.chat.completions.create(
-                        model="gpt-4o-mini",
-                        messages=[{"role": "user", "content": "hi"}],
-                        max_tokens=5,
-                    )
-                    st.success("✅ OpenAI API 연결 성공")
-                except Exception as e:
-                    st.error(f"❌ 연결 실패: {e}")
+        st.divider()
+        recipients = config.load_recipients()
+        if not recipients:
+            st.info("등록된 수신자가 없습니다.")
+        else:
+            st.markdown(f"#### 수신자 목록 ({len(recipients)}명 / 활성: {sum(1 for r in recipients if r.get('active'))}명)")
+            header = st.columns([2, 3, 2, 1, 1])
+            for h, t in zip(header, ["이름", "이메일", "부서", "활성화", "삭제"]):
+                h.markdown(f"**{t}**")
+            st.markdown("<hr style='margin:4px 0'>", unsafe_allow_html=True)
+            for idx, r in enumerate(recipients):
+                col1, col2, col3, col4, col5 = st.columns([2, 3, 2, 1, 1])
+                col1.write(r.get("name", ""))
+                col2.write(r.get("email", ""))
+                col3.write(r.get("dept", ""))
+                is_active = r.get("active", True)
+                badge = '<span class="badge badge-ok">활성</span>' if is_active else '<span class="badge badge-neu">비활성</span>'
+                col4.markdown(badge, unsafe_allow_html=True)
+                if col5.button("🗑", key=f"del_{idx}_{r['email']}", help=f"{r['email']} 삭제"):
+                    config.delete_recipient(r["email"])
+                    st.rerun()
+                if col4.button("전환", key=f"tog_{idx}_{r['email']}", help="활성/비활성 전환"):
+                    config.toggle_recipient(r["email"])
+                    st.rerun()
 
-    # ── SMTP ──
-    with st.expander("📧 SMTP 메일 설정"):
-        c1, c2 = st.columns([3, 1])
-        c1.text_input("서버 주소", value=secrets.get("smtp_host", "미설정"), disabled=True, key="cfg_smtp_host")
-        c2.text_input("포트", value=str(secrets.get("smtp_port", 587)), disabled=True, key="cfg_smtp_port")
-        st.text_input("계정", value=secrets.get("smtp_user", "미설정"), disabled=True, key="cfg_smtp_user")
-        st.text_input("비밀번호", value="****" if secrets.get("smtp_password") else "미설정", type="password", disabled=True, key="cfg_smtp_pw")
-        st.text_input("발신자 이메일", value=secrets.get("smtp_from", "미설정"), disabled=True, key="cfg_smtp_from")
-        if st.button("🔌 SMTP 연결 테스트", key="btn_test_smtp"):
-            smtp_cfg = {
-                "host": secrets.get("smtp_host"),
-                "port": secrets.get("smtp_port", 587),
-                "user": secrets.get("smtp_user"),
-                "password": secrets.get("smtp_password"),
-                "from": secrets.get("smtp_from"),
-            }
-            ok, msg = mailer.test_smtp_connection(smtp_cfg)
-            if ok:
-                st.success(f"✅ {msg}")
-            else:
-                st.error(f"❌ {msg}")
+    with tab_api:
+        st.info("💡 API 키는 Streamlit Community Cloud의 Secrets 설정에서 관리합니다.")
 
-    # ── 스케줄 설정 ──
-    with st.expander("🗓 자동 실행 스케줄"):
+        with st.expander("📡 네이버 뉴스 API", expanded=True):
+            c1, c2 = st.columns(2)
+            c1.text_input("Client ID", value=secrets.get("naver_client_id", "")[:4] + "****" if secrets.get("naver_client_id") else "", disabled=True, key="cfg_naver_id")
+            c2.text_input("Client Secret", value="****" if secrets.get("naver_client_secret") else "미설정", disabled=True, key="cfg_naver_secret")
+            if st.button("🔌 네이버 API 연결 테스트", key="btn_test_naver"):
+                cid = secrets.get("naver_client_id", "")
+                csec = secrets.get("naver_client_secret", "")
+                if not cid or not csec:
+                    st.error("❌ Client ID / Secret 미설정")
+                else:
+                    import requests as _req
+                    try:
+                        r = _req.get(
+                            "https://openapi.naver.com/v1/search/news.json",
+                            headers={"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": csec},
+                            params={"query": "테스트", "display": 1},
+                            timeout=5,
+                        )
+                        if r.status_code == 200:
+                            st.success("✅ 네이버 API 연결 성공")
+                        else:
+                            st.error(f"❌ 응답 오류: {r.status_code}")
+                    except Exception as e:
+                        st.error(f"❌ 연결 실패: {e}")
+
+        with st.expander("📂 DART Open API"):
+            st.text_input("API Key", value="****" if secrets.get("dart_api_key") else "미설정", disabled=True, key="cfg_dart_key")
+            if st.button("🔌 DART API 연결 테스트", key="btn_test_dart"):
+                key = secrets.get("dart_api_key", "")
+                if not key:
+                    st.error("❌ API Key 미설정")
+                else:
+                    import requests as _req
+                    try:
+                        r = _req.get(
+                            "https://opendart.fss.or.kr/api/list.json",
+                            params={"crtfc_key": key, "corp_code": "00155653", "page_count": 1},
+                            timeout=5,
+                        )
+                        res = r.json()
+                        if res.get("status") in ("000", "013"):
+                            st.success("✅ DART API 연결 성공")
+                        else:
+                            st.error(f"❌ 응답 코드: {res.get('status')} — {res.get('message','')}")
+                    except Exception as e:
+                        st.error(f"❌ 연결 실패: {e}")
+
+        with st.expander("🤖 OpenAI API"):
+            st.text_input("API Key", value="sk-****" if secrets.get("openai_api_key") else "미설정", disabled=True, key="cfg_oai_key")
+            st.text_input("모델", value="gpt-4o-mini", disabled=True, key="cfg_oai_model")
+            if st.button("🔌 OpenAI API 연결 테스트", key="btn_test_oai"):
+                key = secrets.get("openai_api_key", "")
+                if not key:
+                    st.error("❌ API Key 미설정")
+                else:
+                    try:
+                        from openai import OpenAI as _OAI
+                        client = _OAI(api_key=key)
+                        resp = client.chat.completions.create(
+                            model="gpt-4o-mini",
+                            messages=[{"role": "user", "content": "hi"}],
+                            max_tokens=5,
+                        )
+                        st.success("✅ OpenAI API 연결 성공")
+                    except Exception as e:
+                        st.error(f"❌ 연결 실패: {e}")
+
+        with st.expander("📧 SMTP 메일 설정"):
+            c1, c2 = st.columns([3, 1])
+            c1.text_input("서버 주소", value=secrets.get("smtp_host", "미설정"), disabled=True, key="cfg_smtp_host")
+            c2.text_input("포트", value=str(secrets.get("smtp_port", 587)), disabled=True, key="cfg_smtp_port")
+            st.text_input("계정", value=secrets.get("smtp_user", "미설정"), disabled=True, key="cfg_smtp_user")
+            st.text_input("비밀번호", value="****" if secrets.get("smtp_password") else "미설정", type="password", disabled=True, key="cfg_smtp_pw")
+            st.text_input("발신자 이메일", value=secrets.get("smtp_from", "미설정"), disabled=True, key="cfg_smtp_from")
+            if st.button("🔌 SMTP 연결 테스트", key="btn_test_smtp"):
+                smtp_cfg = {
+                    "host": secrets.get("smtp_host"),
+                    "port": secrets.get("smtp_port", 587),
+                    "user": secrets.get("smtp_user"),
+                    "password": secrets.get("smtp_password"),
+                    "from": secrets.get("smtp_from"),
+                }
+                ok, msg = mailer.test_smtp_connection(smtp_cfg)
+                if ok:
+                    st.success(f"✅ {msg}")
+                else:
+                    st.error(f"❌ {msg}")
+
+    with tab_schedule:
         sh = secrets.get("schedule_hour", 8)
         sm = secrets.get("schedule_minute", 0)
         st.markdown(f"**현재 스케줄**: 매주 월요일 `{sh:02d}:{sm:02d}` 자동 실행")
