@@ -604,6 +604,9 @@ if page == "📊 리포트 생성":
                     elif name == "농심":
                         if "농심" in text and ("라면" in text or "그룹" in text):
                             result.append(item)
+                    elif name == "삼양식품":
+                        if "삼양" in text and ("라면" in text or "식품" in text or "불닭볶음면" in text):
+                            result.append(item)
                     else:
                         result.append(item)
                 return result
