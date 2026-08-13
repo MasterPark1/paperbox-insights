@@ -540,15 +540,40 @@ if page == "📊 리포트 생성":
                         )
                     ]
                     if ramen_news:
-                        ottogi_ana = data.get("news_analysis", {}).get("오뚜기", {})
-                        sentiment = ottogi_ana.get("sentiment", "중립")
+                        # AI 요약 분석
+                        oai_key = secrets.get("openai_api_key", "")
+                        ramen_ana = analyzer.analyze_news("오뚜기라면", ramen_news, oai_key)
+                        sentiment = ramen_ana.get("sentiment", "중립")
                         badge_cls = {"긍정": "badge-pos", "부정": "badge-neg"}.get(sentiment, "badge-neu")
+
+                        # 뱃지 + 건수
                         st.markdown(
                             f'<span class="badge {badge_cls}">{sentiment}</span> '
-                            f'<span style="font-size:12px;color:#666;">오뚜기 뉴스 중 오뚜기라면 언급 {len(ramen_news)}건</span>',
+                            f'<span style="font-size:12px;color:#666;">오뚜기라면 관련 뉴스 {len(ramen_news)}건</span>',
                             unsafe_allow_html=True,
                         )
                         st.markdown("")
+
+                        # AI 요약 블록
+                        summary = ramen_ana.get("summary", "")
+                        impact = ramen_ana.get("impact", "")
+                        issues = ramen_ana.get("top_issues", [])
+                        if summary:
+                            st.markdown(
+                                f'<div class="insight-block">'
+                                f'<div style="font-size:12px;font-weight:700;color:#002271;margin-bottom:6px;">📝 AI 요약</div>'
+                                f'<div style="font-size:13px;line-height:1.7;">{summary}</div>'
+                                f'{"<div style=margin-top:8px;font-size:13px;line-height:1.7;><b>영향:</b> " + impact + "</div>" if impact else ""}'
+                                f'</div>',
+                                unsafe_allow_html=True,
+                            )
+                        if issues:
+                            st.markdown("**주요 이슈**")
+                            for issue in issues:
+                                st.markdown(f"• {issue}")
+                        st.markdown("---")
+
+                        # 뉴스 기사 리스트
                         for item in ramen_news:
                             title = item.get("title", "–")
                             link = item.get("link", "#")
