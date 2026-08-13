@@ -595,18 +595,15 @@ if page == "📊 리포트 생성":
 
             # ── 뉴스 탭 ──
             # 팔도: "팔도라면/비빔면/식품" 중 하나가 포함된 기사만 유효
-            _PALDO_REQUIRED = ["팔도라면", "팔도비빔면", "팔도식품", "팔도 라면", "팔도 비빔면"]
-
             def _filter_news(name: str, items: list) -> list:
                 if name != "팔도":
                     return items
-                return [
-                    item for item in items
-                    if any(
-                        kw in item.get("title", "") + item.get("description", "")
-                        for kw in _PALDO_REQUIRED
-                    )
-                ]
+                result = []
+                for item in items:
+                    text = item.get("title", "") + item.get("description", "")
+                    if "팔도" in text and ("라면" in text or "비빔면" in text):
+                        result.append(item)
+                return result
 
             with tab_news:
                 for c in COMPANIES:
