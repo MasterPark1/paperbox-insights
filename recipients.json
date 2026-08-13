@@ -1,11 +1,5 @@
 [
   {
-    "name": "park",
-    "email": "parkarea@naver.com",
-    "dept": "대표",
-    "active": true
-  },
-  {
     "name": "박대표",
     "email": "ms.park@hansol.com",
     "dept": "대표",
