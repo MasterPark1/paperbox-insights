@@ -22,6 +22,8 @@ _STRATEGIST_SYSTEM = (
 # ---------------------------------------------------------------------------
 
 def _make_client(api_key: str) -> OpenAI:
+    if not api_key:
+        raise ValueError("OpenAI API 키가 설정되지 않았습니다. Streamlit Secrets에서 OPENAI_API_KEY를 확인하세요.")
     return OpenAI(api_key=api_key)
 
 
@@ -129,7 +131,7 @@ def analyze_news(company_name: str, news_items: list[dict], api_key: str) -> dic
             "top_issues": result.get("top_issues", []),
             "importance": result.get("importance", "보통"),
         }
-    except (AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
+    except (ValueError, AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
         return dict(_NEWS_ERROR_DEFAULT)
 
 
@@ -202,7 +204,7 @@ def analyze_disclosures(
             "grade": result.get("grade", "중"),
             "special_notes": result.get("special_notes", ""),
         }
-    except (AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
+    except (ValueError, AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
         return dict(_DISC_ERROR_DEFAULT)
 
 
@@ -292,7 +294,7 @@ def analyze_financials(all_financials: dict, api_key: str) -> str:
 
         return _chat_text(client, _ANALYST_SYSTEM, user_prompt)
 
-    except (AuthenticationError, RateLimitError, APIError, Exception):
+    except (ValueError, AuthenticationError, RateLimitError, APIError, Exception):
         return "재무 분석에 실패했습니다."
 
 
@@ -441,5 +443,5 @@ def generate_insight(
             "strategy": result.get("strategy", ""),
             "priority": result.get("priority", "C"),
         }
-    except (AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
+    except (ValueError, AuthenticationError, RateLimitError, APIError, json.JSONDecodeError, Exception):
         return dict(_INSIGHT_ERROR_DEFAULT)
