@@ -172,6 +172,23 @@ def load_snapshot(github_path: str) -> dict | None:
         return None
 
 
+def delete_all_snapshots() -> tuple[int, int]:
+    """report_history/ 의 모든 스냅샷을 삭제한다.
+
+    Returns:
+        (성공 건수, 실패 건수)
+    """
+    snapshots = list_snapshots()
+    success, failed = 0, 0
+    for snap in snapshots:
+        ok, _ = delete_snapshot(snap["path"], snap["sha"])
+        if ok:
+            success += 1
+        else:
+            failed += 1
+    return success, failed
+
+
 def delete_snapshot(github_path: str, sha: str) -> tuple[bool, str]:
     """GitHub에서 스냅샷 파일을 삭제한다."""
     token = _github_token()

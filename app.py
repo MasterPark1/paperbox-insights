@@ -243,6 +243,31 @@ with st.sidebar:
                     else:
                         st.error(msg)
 
+            st.markdown("---")
+            if "confirm_delete_all" not in st.session_state:
+                st.session_state.confirm_delete_all = False
+
+            if not st.session_state.confirm_delete_all:
+                if st.button("🗑 전체 삭제", use_container_width=True, key="btn_del_all"):
+                    st.session_state.confirm_delete_all = True
+                    st.rerun()
+            else:
+                st.warning(f"⚠️ 저장된 리포트 {len(snaps)}개를 모두 삭제합니다.")
+                c1, c2 = st.columns(2)
+                with c1:
+                    if st.button("확인", use_container_width=True, key="btn_del_all_confirm"):
+                        with st.spinner("삭제 중..."):
+                            ok_cnt, fail_cnt = history.delete_all_snapshots()
+                        st.session_state.snapshot_list = []
+                        st.session_state.snapshots_loaded = False
+                        st.session_state.confirm_delete_all = False
+                        st.success(f"✅ {ok_cnt}개 삭제 완료" + (f" ({fail_cnt}개 실패)" if fail_cnt else ""))
+                        st.rerun()
+                with c2:
+                    if st.button("취소", use_container_width=True, key="btn_del_all_cancel"):
+                        st.session_state.confirm_delete_all = False
+                        st.rerun()
+
     st.divider()
     next_run = scheduler.get_next_run()
     st.markdown(f"""
