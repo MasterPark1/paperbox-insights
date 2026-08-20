@@ -1,0 +1,791 @@
+{
+  "saved_at": "2026-08-20T01:15:51",
+  "label": "20260820_011551",
+  "data": {
+    "financials": {
+      "오뚜기": null,
+      "삼양식품": null,
+      "농심": null,
+      "팔도": null
+    },
+    "ottogi_ramen_detail": null,
+    "insights": {
+      "오뚜기": {
+        "order_forecast": "오뚜기의 저당 라인업 강화와 K-라면 수출 증가에 따라 발주 가능성이 높아질 것으로 예상됩니다.",
+        "risks": [
+          "가격 인상으로 인한 소비자 반응 저조",
+          "해외 매출 감소로 인한 글로벌 시장 입지 약화"
+        ],
+        "opportunities": [
+          "건강식품 시장에서의 경쟁력 강화",
+          "K-라면의 수출 증가로 인한 새로운 시장 개척 가능성",
+          "신제품 출시로 인한 소비자 관심 증대"
+        ],
+        "strategy": "오뚜기의 라면 부문은 전체 매출에서 중요한 비중을 차지하고 있으며, 최근 저당 제품군과 K-라면 수출 증가로 긍정적인 동향을 보이고 있습니다. 이에 따라, 저당 라인업을 중심으로 한 마케팅 전략을 강화하고, 해외 시장 진출을 위한 파트너십을 확대하는 것이 필요합니다.",
+        "priority": "A"
+      },
+      "삼양식품": {
+        "order_forecast": "삼양식품의 해외 시장에서의 성장은 추가적인 발주 가능성을 높이고 있습니다. 특히 불닭볶음면의 글로벌 흥행으로 인해 컵라면 용기의 수요가 증가할 것으로 예상됩니다.",
+        "risks": [
+          "반도체 주식의 인기 상승으로 인한 소액주주 외면",
+          "글로벌 경제 불확실성으로 인한 소비자 수요 감소 가능성"
+        ],
+        "opportunities": [
+          "해외 시장에서의 매출 증가에 따른 추가 주문 유도",
+          "삼양식품의 생산능력 확대에 따른 안정적인 공급 가능성"
+        ],
+        "strategy": "삼양식품의 해외 시장 성장을 적극적으로 활용하여 발주를 유도하는 마케팅 전략을 강화해야 합니다. 또한, 생산능력 확대에 맞춰 안정적인 공급 체계를 구축하여 고객의 신뢰를 확보하는 것이 중요합니다.",
+        "priority": "A"
+      },
+      "농심": {
+        "order_forecast": "농심의 글로벌 마케팅 강화와 신제품 출시가 이어지고 있어 발주 가능성이 높아질 것으로 예상됩니다.",
+        "risks": [
+          "글로벌 경제 불확실성으로 인한 소비자 수요 감소",
+          "경쟁사의 공격적인 마케팅 및 가격 인하",
+          "원자재 가격 상승으로 인한 생산 비용 증가"
+        ],
+        "opportunities": [
+          "신라면의 2차 글로벌 캠페인을 통한 브랜드 인지도 상승",
+          "에스파와의 협업으로 젊은 소비층 확보",
+          "해외 시장에서의 라면 수출 증가 가능성"
+        ],
+        "strategy": "농심의 라면 부문은 전체 매출의 상당 부분을 차지하고 있으며, 최근 신제품 출시와 글로벌 캠페인으로 시장 점유율이 상승하고 있습니다. 이러한 기회를 활용하여 고객 맞춤형 종이용기를 제안하고, 농심의 글로벌 확장에 맞춘 제품 개발을 통해 협력 관계를 강화할 필요가 있습니다.",
+        "priority": "A"
+      },
+      "팔도": {
+        "order_forecast": "팔도의 AI 자율제조 시스템 도입으로 인해 생산 효율성이 높아지고 품질 안정성이 강화될 것으로 예상되어, 향후 발주 가능성이 높아질 것으로 보인다.",
+        "risks": [
+          "AI 시스템 도입에 따른 초기 투자 비용 증가",
+          "기술적 문제 발생 시 생산 차질 가능성",
+          "경쟁사의 기술 발전에 따른 시장 경쟁 심화"
+        ],
+        "opportunities": [
+          "고품질 제품 공급을 통한 거래처 신뢰도 향상",
+          "생산 효율성 증가로 인한 가격 경쟁력 확보",
+          "AI 기술을 활용한 맞춤형 제품 개발 가능성"
+        ],
+        "strategy": "팔도의 기술 혁신에 발맞추어 품질과 생산성을 강조한 제품을 제안하고, 안정적인 공급망을 구축하여 거래처와의 신뢰를 강화해야 한다. 또한, 팔도의 AI 시스템에 대한 이해를 바탕으로 맞춤형 솔루션을 제공하여 경쟁력을 높이는 것이 중요하다.",
+        "priority": "A"
+      }
+    },
+    "financial_comment": "제공된 재무 데이터가 없어 각 거래처의 구체적인 재무 성과를 분석하기는 어렵습니다. 그러나 일반적으로, 라면 제조사들은 시장 점유율, 브랜드 인지도, 생산량 및 판매량에 따라 발주 여력이 달라질 수 있습니다. 따라서, 시장에서의 위치와 경쟁력을 고려할 때, 농심과 삼양식품은 대규모 생산과 강력한 브랜드를 보유하고 있어 우선적으로 영업을 진행하는 것이 바람직합니다. 팔도와 오뚜기는 상대적으로 시장 점유율이 낮을 수 있으나, 특정 제품군에서의 성장 가능성을 고려하여 지속적인 관계 유지를 위한 접근이 필요합니다. 데이터 확보 후 보다 정교한 분석이 가능할 것입니다.",
+    "news_analysis": {
+      "오뚜기": {
+        "summary": "오뚜기는 최근 '가뿐한끼' 브랜드의 저당 라인업을 강화하며 신제품을 출시했다. 그러나 가격 인상과 해외 매출 감소 등의 이슈도 나타나고 있다. K-라면의 수출 증가와 함께 오뚜기의 생산능력 확대가 중요한 과제로 부각되고 있다.",
+        "sentiment": "중립",
+        "impact": "오뚜기의 저당 제품군 강화는 건강식품 시장에서의 경쟁력을 높일 것으로 기대된다. 그러나 가격 인상은 소비자 반응에 영향을 미칠 수 있으며, 해외 매출 감소는 글로벌 시장에서의 입지에 부정적인 영향을 줄 수 있다.",
+        "top_issues": [
+          "가뿐한끼 저당 라인업 강화",
+          "가격 인상 및 소비자 반응",
+          "해외 매출 감소 및 생산능력 확대"
+        ],
+        "importance": "높음"
+      },
+      "삼양식품": {
+        "summary": "삼양식품은 불닭볶음면의 글로벌 흥행으로 2분기 매출이 7703억원에 달하며, 영업이익도 1762억원으로 증가했습니다. 해외 시장에서의 성장이 두드러지며, 직원 수와 생산능력도 확대되고 있습니다. 그러나 반도체 주식의 인기에 밀려 소액주주들의 외면을 받고 있는 상황입니다.",
+        "sentiment": "긍정",
+        "impact": "삼양식품의 매출 증가와 영업이익 상승은 B2B 거래처에 긍정적인 영향을 미칠 것으로 보입니다. 특히, 해외 시장에서의 성장은 추가적인 주문 증가를 유도할 수 있습니다.",
+        "top_issues": [
+          "불닭볶음면의 글로벌 판매 증가",
+          "상반기 해외 매출 6000억원 돌파",
+          "반도체 주식의 인기에 따른 소액주주 외면"
+        ],
+        "importance": "높음"
+      },
+      "농심": {
+        "summary": "농심은 글로벌 앰배서더 에스파와 함께 신라면의 2차 글로벌 캠페인을 전개하며, 다양한 디지털 콘텐츠를 통해 소비자와 소통을 강화하고 있다. 이번 캠페인은 신라면의 '매콤한 행복'을 강조하며 북미, 아시아, 유럽 등에서 진행된다. 또한, 농심은 경남지역 수해 복구를 위한 긴급 푸드팩 지원에도 나섰다.",
+        "sentiment": "긍정",
+        "impact": "농심의 글로벌 마케팅 강화는 해외 시장에서의 브랜드 인지도를 높이고, 소비자와의 관계를 더욱 깊게 할 것으로 예상된다. 또한, 수해 복구 지원은 기업의 사회적 책임을 다하는 모습을 보여주어 브랜드 이미지에 긍정적인 영향을 미칠 것이다.",
+        "top_issues": [
+          "신라면 2차 글로벌 캠페인",
+          "에스파와의 협업",
+          "경남지역 수해 복구 지원"
+        ],
+        "importance": "높음"
+      },
+      "팔도": {
+        "summary": "팔도가 나주공장에 AI 기반 자율제조 시스템을 도입하여 생산 공정의 고도화를 추진하고 있다. 이 시스템은 면발 두께와 성분을 실시간으로 제어하여 품질을 안정화하고, 생산 효율성을 높이는 데 기여할 예정이다. 이러한 기술적 혁신은 팔도의 경쟁력을 강화하고 소비자에게 고품질 라면을 제공하는 데 중점을 두고 있다.",
+        "sentiment": "긍정",
+        "impact": "팔도의 AI 자율제조 시스템 도입은 생산 효율성을 높이고 품질 관리를 강화하여 거래처에 안정적인 공급을 보장할 것으로 기대된다. 이는 팔도의 시장 경쟁력을 높이고, 고객 만족도를 향상시키는 데 기여할 것이다.",
+        "top_issues": [
+          "AI 자율제조 시스템 도입",
+          "생산 공정 고도화",
+          "품질 안정성 강화"
+        ],
+        "importance": "높음"
+      }
+    },
+    "disclosure_analysis": {
+      "오뚜기": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      },
+      "삼양식품": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      },
+      "농심": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      },
+      "팔도": {
+        "summary": "공시 데이터 없음",
+        "impact": "",
+        "grade": "중",
+        "special_notes": ""
+      }
+    },
+    "news": {
+      "오뚜기": [
+        {
+          "title": "오뚜기, '가뿐한끼' 인기 제품 저당 리뉴얼·신제품 선봬",
+          "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=2404",
+          "pubDate": "2026-08-20T10:04:00+09:00"
+        },
+        {
+          "title": "오뚜기, 식단관리 브랜드 ‘가뿐한끼’ 저당 라인업 강화",
+          "link": "http://www.beyondpost.co.kr/view.php?ud=2026082009571447618ef25b590_30",
+          "pubDate": "2026-08-20T09:58:00+09:00"
+        },
+        {
+          "title": "오뚜기, '가뿐한끼' 저당 라인업 확대...신제품 및 리뉴얼 4종 출시",
+          "link": "http://www.popcornnews.net/news/articleView.html?idxno=130227",
+          "pubDate": "2026-08-20T09:52:00+09:00"
+        },
+        {
+          "title": "반도체에 밀린 'K-라면'…하반기 불 타 오르나",
+          "link": "https://n.news.naver.com/mnews/article/277/0005805082?sid=103",
+          "pubDate": "2026-08-20T09:50:00+09:00"
+        },
+        {
+          "title": "[오늘의식탁] CJ제일제당ㆍ오리온ㆍ농심ㆍ삼립ㆍ풀무원ㆍ동원F&Bㆍ오뚜...",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608200917596000623",
+          "pubDate": "2026-08-20T09:40:00+09:00"
+        },
+        {
+          "title": "[오늘의 유통가] 동원F&B, 양반김에 질소충전공법 도입…글로벌 확장 탄...",
+          "link": "https://dealsite.co.kr/articles/167528",
+          "pubDate": "2026-08-20T09:34:00+09:00"
+        },
+        {
+          "title": "오뚜기, '가뿐한끼' 인기 제품 저당 리뉴얼…라인업 강화",
+          "link": "https://www.delighti.co.kr/news/articleView.html?idxno=120447",
+          "pubDate": "2026-08-20T09:32:00+09:00"
+        },
+        {
+          "title": "오뚜기, ‘가뿐한끼’ 저당 라인업 확대…곤누들·카레·짜장 리뉴얼",
+          "link": "https://thetracker.co.kr/View.aspx?No=4192261",
+          "pubDate": "2026-08-20T08:57:00+09:00"
+        },
+        {
+          "title": "오뚜기, 식단관리 브랜드 '가뿐한끼' 전면 개편…'저당' 시장 정조준",
+          "link": "http://www.newsdream.kr/news/articleView.html?idxno=116528",
+          "pubDate": "2026-08-20T08:22:00+09:00"
+        },
+        {
+          "title": "CJ제일제당·농심·동원F&B 광고비 확대…롯데웰푸드·삼립·풀무원은 허...",
+          "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=761781",
+          "pubDate": "2026-08-20T06:56:00+09:00"
+        },
+        {
+          "title": "해외서 다시 끓는 K-라면…“생산능력 확대가 관건”",
+          "link": "https://www.viva100.com/article/20260819501008",
+          "pubDate": "2026-08-20T06:02:00+09:00"
+        },
+        {
+          "title": "[K-푸드 글로벌 점령 지도] 국내 식품 8개사 상반기 해외매출 8조 육박…...",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608190933104280448",
+          "pubDate": "2026-08-20T06:00:00+09:00"
+        },
+        {
+          "title": "양보다 질…K푸드, 해외 '수익성'이 실적 갈랐다",
+          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1397226",
+          "pubDate": "2026-08-20T06:00:00+09:00"
+        },
+        {
+          "title": "오뚜기, ‘라이트앤조이’ 앞세워 저감화 식품 시장 공략",
+          "link": "https://n.news.naver.com/mnews/article/081/0003671799?sid=101",
+          "pubDate": "2026-08-20T05:03:00+09:00"
+        },
+        {
+          "title": "“K라면 수출 호조에 고용도 확대”…삼양식품 직원 역대 최대",
+          "link": "https://www.sentv.co.kr/article/view/sentv202608190105",
+          "pubDate": "2026-08-19T18:54:00+09:00"
+        },
+        {
+          "title": "'사상 첫 해외매출 6,000억' 공장도 법인도 없이…베트남서 존재감 키우...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43836",
+          "pubDate": "2026-08-19T18:12:00+09:00"
+        },
+        {
+          "title": "오뚜기 (함영준 회장), '갓뚜기' 이후 10년…이제는 자신의 성적표가 필...",
+          "link": "http://www.newsworker.co.kr/news/articleView.html?idxno=441820",
+          "pubDate": "2026-08-19T16:52:00+09:00"
+        },
+        {
+          "title": "\"상추 대신 식혜 드려요\"…채솟값·가공식품 줄인상에 장바구니 '비명'",
+          "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4081533",
+          "pubDate": "2026-08-19T16:26:00+09:00"
+        },
+        {
+          "title": "양준일 7회째 1위·빈예서·김중연 TOP3 유지…방탄소년단 19계단 상승·...",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16167574",
+          "pubDate": "2026-08-19T16:22:00+09:00"
+        },
+        {
+          "title": "엠아이큐브솔루션, 중기부 AI 상용화 사업 선정…총사업비 23.7억 규모 수...",
+          "link": "https://www.hellot.net/news/article.html?no=114455",
+          "pubDate": "2026-08-19T15:38:00+09:00"
+        },
+        {
+          "title": "빵 이어 컵라면·만두까지…삼양식품은 \"가격인상 없다\"",
+          "link": "http://www.niceeconomy.co.kr/news/articleView.html?idxno=90599",
+          "pubDate": "2026-08-19T15:26:00+09:00"
+        },
+        {
+          "title": "소득 0.4% 오를 때 먹거리 최대 20%↑…장바구니도 유통사도 ‘부담’",
+          "link": "https://n.news.naver.com/mnews/article/138/0002238279?sid=101",
+          "pubDate": "2026-08-19T15:11:00+09:00"
+        },
+        {
+          "title": "K푸드 호황에도 음식료株 약세…농심·빙그레·휴럼은 방긋",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=478647",
+          "pubDate": "2026-08-19T14:32:00+09:00"
+        },
+        {
+          "title": "밀가루·팜유에 용기까지 뛰었다…식품업계, 가격 인상 '궁여지책'",
+          "link": "https://n.news.naver.com/mnews/article/003/0014135467?sid=103",
+          "pubDate": "2026-08-19T14:13:00+09:00"
+        },
+        {
+          "title": "제조사 올리고 소비자 아끼고…최저가에 마진 눌린 유통사",
+          "link": "https://n.news.naver.com/mnews/article/417/0001155771?sid=101",
+          "pubDate": "2026-08-19T13:59:00+09:00"
+        },
+        {
+          "title": "상반기 라면 수출 '9억 달러' 돌파…K-라면 3사, 글로벌 성장 '가속'",
+          "link": "https://www.banronbodo.com/news/articleView.html?idxno=32842",
+          "pubDate": "2026-08-19T13:08:00+09:00"
+        },
+        {
+          "title": "농심, 경남 호우 피해지역에 구호식품 1200세트 지원",
+          "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=206744",
+          "pubDate": "2026-08-19T11:40:00+09:00"
+        },
+        {
+          "title": "반년도 안 돼 인상… 제빵업계 가격표 바꾼 이유는",
+          "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=726412",
+          "pubDate": "2026-08-19T10:50:00+09:00"
+        }
+      ],
+      "삼양식품": [
+        {
+          "title": "\"신라면·불닭 1등 아니네\"…한국인 장바구니 열어보니 '반전' [권용훈의...",
+          "link": "https://n.news.naver.com/mnews/article/015/0005322719?sid=101",
+          "pubDate": "2026-08-20T10:01:00+09:00"
+        },
+        {
+          "title": "반도체에 밀린 'K-라면'…하반기 불 타 오르나",
+          "link": "https://n.news.naver.com/mnews/article/277/0005805082?sid=103",
+          "pubDate": "2026-08-20T09:50:00+09:00"
+        },
+        {
+          "title": "\"해외서 너무 잘 벌어서?\"...라면업계, 역대급 실적에 '봉지면 인상' 딜...",
+          "link": "https://www.techm.kr/news/articleView.html?idxno=154442",
+          "pubDate": "2026-08-20T09:08:00+09:00"
+        },
+        {
+          "title": "[더벨][thebell interview] 삼익악기 정인모 독립이사 \"주주가치 신경쓸수...",
+          "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202608131645564680103369",
+          "pubDate": "2026-08-20T08:28:00+09:00"
+        },
+        {
+          "title": "[더벨]현금 쌓이는 삼양식품, 삼성전자·현대차도 담았다",
+          "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202608181012510880105021",
+          "pubDate": "2026-08-20T07:18:00+09:00"
+        },
+        {
+          "title": "삼양식품, 2분기 매출 7703억원, 영업이익 1762억원",
+          "link": "http://www.queen.co.kr/news/articleView.html?idxno=461959",
+          "pubDate": "2026-08-20T07:00:00+09:00"
+        },
+        {
+          "title": "공장 늘리고 배당 높이고…삼양식품, ‘불닭 이익’ 선순환 노린다",
+          "link": "https://n.news.naver.com/mnews/article/119/0003123238?sid=101",
+          "pubDate": "2026-08-20T06:30:00+09:00"
+        },
+        {
+          "title": "'불닭반도체' 삼양식품, 하반기 최고가 찍고 숨고르기…중국 증설 업고...",
+          "link": "https://www.etoday.co.kr/news/view/2616051",
+          "pubDate": "2026-08-20T06:02:00+09:00"
+        },
+        {
+          "title": "해외서 다시 끓는 K-라면…“생산능력 확대가 관건”",
+          "link": "https://www.viva100.com/article/20260819501008",
+          "pubDate": "2026-08-20T06:02:00+09:00"
+        },
+        {
+          "title": "양보다 질…K푸드, 해외 '수익성'이 실적 갈랐다",
+          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1397226",
+          "pubDate": "2026-08-20T06:00:00+09:00"
+        },
+        {
+          "title": "[K-푸드 글로벌 점령 지도] 국내 식품 8개사 상반기 해외매출 8조 육박…...",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608190933104280448",
+          "pubDate": "2026-08-20T06:00:00+09:00"
+        },
+        {
+          "title": "“‘불닭’으로 번 돈, 삼성전자 6억 넣어 10억 됐다”…4개월 만에 평가...",
+          "link": "https://n.news.naver.com/mnews/article/016/0002685837?sid=101",
+          "pubDate": "2026-08-19T22:31:00+09:00"
+        },
+        {
+          "title": "“K라면 수출 호조에 고용도 확대”…삼양식품 직원 역대 최대",
+          "link": "https://www.sentv.co.kr/article/view/sentv202608190105",
+          "pubDate": "2026-08-19T18:54:00+09:00"
+        },
+        {
+          "title": "'사상 첫 해외매출 6,000억' 공장도 법인도 없이…베트남서 존재감 키우...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43836",
+          "pubDate": "2026-08-19T18:12:00+09:00"
+        },
+        {
+          "title": "[퇴근길머니] 미국발 삭풍에 코스피 5% 급락…'불닭 반도체'의 반란?",
+          "link": "https://n.news.naver.com/mnews/article/422/0000897314?sid=101",
+          "pubDate": "2026-08-19T17:38:00+09:00"
+        },
+        {
+          "title": "백종원 더본코리아 'TBK소스' 해외영업 잰걸음, '제2의 이금기·타바스코...",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=445117",
+          "pubDate": "2026-08-19T17:36:00+09:00"
+        },
+        {
+          "title": "일하고 즐기고 머무는 공간으로…원주시, 462억 규모 문화선도산단 시동",
+          "link": "https://n.news.naver.com/mnews/article/002/0002452694?sid=102",
+          "pubDate": "2026-08-19T17:36:00+09:00"
+        },
+        {
+          "title": "입맛 바꾸는 기후변화… 더워진 날씨, '매운맛' 찾는 사람들",
+          "link": "https://www.sisaweek.com/news/articleView.html?idxno=237372",
+          "pubDate": "2026-08-19T17:26:00+09:00"
+        },
+        {
+          "title": "\"삼전·닉스 주주환원책, 새로운 반등 변곡점 될 것\"",
+          "link": "https://www.kpinews.kr/newsView/1065598411264956",
+          "pubDate": "2026-08-19T17:17:00+09:00"
+        },
+        {
+          "title": "[더벨][밸류업 프로그램 리뷰] 삼양식품 중간배당 4년 새 4배…성장 투자...",
+          "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202608141233430160109241",
+          "pubDate": "2026-08-19T16:42:00+09:00"
+        },
+        {
+          "title": "“한국선 더 클 곳 없다”…미국 시장서 판 키우는 K푸드",
+          "link": "https://n.news.naver.com/mnews/article/009/0005722994?sid=101",
+          "pubDate": "2026-08-19T16:28:00+09:00"
+        },
+        {
+          "title": "빵 이어 컵라면·만두까지…삼양식품은 \"가격인상 없다\"",
+          "link": "http://www.niceeconomy.co.kr/news/articleView.html?idxno=90599",
+          "pubDate": "2026-08-19T15:26:00+09:00"
+        },
+        {
+          "title": "팔도 라면공장에 '피지컬 AI'…면발 품질 자동 제어",
+          "link": "http://www.4th.kr/news/articleView.html?idxno=2116572",
+          "pubDate": "2026-08-19T15:06:00+09:00"
+        },
+        {
+          "title": "K푸드 호황에도 음식료株 약세…농심·빙그레·휴럼은 방긋",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=478647",
+          "pubDate": "2026-08-19T14:32:00+09:00"
+        },
+        {
+          "title": "K-푸드 수출 성장세…식품업계, 해외사업 비중 커진다",
+          "link": "https://www.polinews.co.kr/news/articleView.html?idxno=740619",
+          "pubDate": "2026-08-19T13:56:00+09:00"
+        },
+        {
+          "title": "[단독] 농심, '신라면' 글로벌 콘텐츠 강화 나선다…美 자회사 설립",
+          "link": "https://n.news.naver.com/mnews/article/421/0009121317?sid=101",
+          "pubDate": "2026-08-19T13:44:00+09:00"
+        },
+        {
+          "title": "상반기 라면 수출 '9억 달러' 돌파…K-라면 3사, 글로벌 성장 '가속'",
+          "link": "https://www.banronbodo.com/news/articleView.html?idxno=32842",
+          "pubDate": "2026-08-19T13:08:00+09:00"
+        },
+        {
+          "title": "“삼성전자 6억 샀더니 10억 됐다”…‘불닭 대박’ 삼양식품, 6300억 곳...",
+          "link": "https://n.news.naver.com/mnews/article/022/0004151949?sid=101",
+          "pubDate": "2026-08-19T09:19:00+09:00"
+        },
+        {
+          "title": "\"만들기 무섭게 팔려나간다\"…반도체만큼 잘 나가는 '이것' [분석+]",
+          "link": "https://n.news.naver.com/mnews/article/015/0005322212?sid=101",
+          "pubDate": "2026-08-19T06:31:00+09:00"
+        },
+        {
+          "title": "불닭으로 번 돈 삼성전자에 넣었더니…3개월 만에 77% 껑충",
+          "link": "https://n.news.naver.com/mnews/article/053/0000060795?sid=101",
+          "pubDate": "2026-08-18T23:15:00+09:00"
+        },
+        {
+          "title": "'불닭 신화' 삼양식품…전인장 전 회장 '오너 사법 리스크' 9월10일 결판",
+          "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=84623",
+          "pubDate": "2026-08-18T22:00:00+09:00"
+        },
+        {
+          "title": "[헬로스톡] 8/18 주목할 종목 : LS·SK·LG전자·삼양식품",
+          "link": "https://www.hellot.net/news/article.html?no=114433",
+          "pubDate": "2026-08-18T17:54:00+09:00"
+        },
+        {
+          "title": "“삼성전자 18만원에 3188주 샀다” 주주된 삼양식품…‘면비디아’가 ...",
+          "link": "https://n.news.naver.com/mnews/article/011/0004652699?sid=101",
+          "pubDate": "2026-08-18T17:09:00+09:00"
+        },
+        {
+          "title": "\"불닭 해외서 더 뜨거웠다\"…삼양식품 2분기 매출 7,703억",
+          "link": "https://www.ilemonde.com/news/articleView.html?idxno=30495",
+          "pubDate": "2026-08-18T16:14:00+09:00"
+        },
+        {
+          "title": "\"공장이 모자라 못 판다…가동률 101% 찍은 삼양식품, 돌파구는 '중국 신...",
+          "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=271932",
+          "pubDate": "2026-08-18T15:52:00+09:00"
+        },
+        {
+          "title": "불닭·비비고·초코파이 잘 팔리자…식품업계, 해외 공장 키운다",
+          "link": "https://www.g-enews.com/view.php?ud=202608181532463092740eacf404_1",
+          "pubDate": "2026-08-18T15:52:00+09:00"
+        }
+      ],
+      "농심": [
+        {
+          "title": "농심, 에스파와 신라면 2차 글로벌 캠페인 진행",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=748446",
+          "pubDate": "2026-08-20T10:10:00+09:00"
+        },
+        {
+          "title": "농심, 에스파와 신라면 2차 글로벌 캠페인…일상 속 ‘매운맛’ 담아",
+          "link": "https://www.seoultimes.news/news/article.html?no=2000098960",
+          "pubDate": "2026-08-20T10:07:00+09:00"
+        },
+        {
+          "title": "농심, 에스파와 신라면 2차 글로벌 광고 캠페인",
+          "link": "https://n.news.naver.com/mnews/article/001/0016260429?sid=101",
+          "pubDate": "2026-08-20T10:06:00+09:00"
+        },
+        {
+          "title": "농심, 에스파와 신라면 2차 글로벌 광고 캠페인 전개",
+          "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=238885",
+          "pubDate": "2026-08-20T10:02:00+09:00"
+        },
+        {
+          "title": "\"신라면·불닭 1등 아니네\"…한국인 장바구니 열어보니 '반전' [권용훈의...",
+          "link": "https://n.news.naver.com/mnews/article/015/0005322719?sid=101",
+          "pubDate": "2026-08-20T10:01:00+09:00"
+        },
+        {
+          "title": "농심, 에스파와 '신라면' 2차 글로벌 캠페인 전개...일상 속 '매콤한 행...",
+          "link": "http://www.popcornnews.net/news/articleView.html?idxno=130232",
+          "pubDate": "2026-08-20T10:00:00+09:00"
+        },
+        {
+          "title": "농심 ‘신라면’, 에스파와 ‘글로벌 캠페인’ 시즌2 전개…영상 15편 공...",
+          "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065571238297862",
+          "pubDate": "2026-08-20T10:00:00+09:00"
+        },
+        {
+          "title": "농심, 신라면 글로벌 앰배서더 에스파와 2차 캠페인 전개",
+          "link": "http://www.amnews.co.kr/news/articleView.html?idxno=74017",
+          "pubDate": "2026-08-20T09:58:00+09:00"
+        },
+        {
+          "title": "농심, 에스파와 신라면 2차 글로벌 캠페인 전개",
+          "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=252321",
+          "pubDate": "2026-08-20T09:58:00+09:00"
+        },
+        {
+          "title": "농심, 신라면 에스파 2차 글로벌 캠페인 공개",
+          "link": "http://www.koreastocknews.com/news/articleView.html?idxno=120675",
+          "pubDate": "2026-08-20T09:56:00+09:00"
+        },
+        {
+          "title": "천안 K-컬처박람회 9월 2일 개막, \"모든 이들에 즐거움과 활력 주는 박람...",
+          "link": "http://www.segyebiz.com/newsView/20260820507456?OutUrl=naver",
+          "pubDate": "2026-08-20T09:56:00+09:00"
+        },
+        {
+          "title": "농심, 에스파 신라면 글로벌 캠페인 확대…북미·아시아·유럽 전개",
+          "link": "https://www.cstimes.com/news/articleView.html?idxno=717372",
+          "pubDate": "2026-08-20T09:54:00+09:00"
+        },
+        {
+          "title": "3억 기부에 매트리스까지 … 유통가, 거제·통영 수해 복구 팔 걷었다",
+          "link": "https://biz.newdaily.co.kr/site/data/html/2026/08/20/2026082000060.html",
+          "pubDate": "2026-08-20T09:54:00+09:00"
+        },
+        {
+          "title": "반도체에 밀린 'K-라면'…하반기 불 타 오르나",
+          "link": "https://n.news.naver.com/mnews/article/277/0005805082?sid=103",
+          "pubDate": "2026-08-20T09:50:00+09:00"
+        },
+        {
+          "title": "[오늘의식탁] CJ제일제당ㆍ오리온ㆍ농심ㆍ삼립ㆍ풀무원ㆍ동원F&Bㆍ오뚜...",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608200917596000623",
+          "pubDate": "2026-08-20T09:40:00+09:00"
+        },
+        {
+          "title": "'에스파'와 함께하는 신라면, 일상 속 '매콤한 행복' 글로벌 캠페인",
+          "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=521422",
+          "pubDate": "2026-08-20T09:36:00+09:00"
+        },
+        {
+          "title": "[오늘의 유통가] 동원F&B, 양반김에 질소충전공법 도입…글로벌 확장 탄...",
+          "link": "https://dealsite.co.kr/articles/167528",
+          "pubDate": "2026-08-20T09:34:00+09:00"
+        },
+        {
+          "title": "무대 밖 에스파도 ‘신라면’…농심, 2차 글로벌 광고 공개",
+          "link": "https://www.sentv.co.kr/article/view/sentv202608200035",
+          "pubDate": "2026-08-20T09:34:00+09:00"
+        },
+        {
+          "title": "[식음료브리핑] 이디야커피, 에너지의 날 맞아 '불을 끄고 별을 켜다' 동...",
+          "link": "https://www.seoulfn.com/news/articleView.html?idxno=636032",
+          "pubDate": "2026-08-20T09:33:00+09:00"
+        },
+        {
+          "title": "에스파가 전하는 '매콤한 행복'…농심 신라면, 2차 글로벌 캠페인",
+          "link": "https://n.news.naver.com/mnews/article/421/0009122654?sid=101",
+          "pubDate": "2026-08-20T09:15:00+09:00"
+        },
+        {
+          "title": "샤퍼 이스포츠, VCT 퍼시픽 돌풍…키움 DRX와 플레이오프 진출 격돌",
+          "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=88176",
+          "pubDate": "2026-08-20T05:14:00+09:00"
+        },
+        {
+          "title": "발로란트, VCT 퍼시픽 스테이지 2...퍼시픽 킬러로 발돋움한 샤퍼 이스포...",
+          "link": "https://www.gamechosun.co.kr/webzine/article/view.php?no=224376",
+          "pubDate": "2026-08-20T01:56:00+09:00"
+        },
+        {
+          "title": "[LCK] ‘동부의 왕’ 한진 브리온, KeSPA컵 제패 ‘DN 천하’ 하루만에 ...",
+          "link": "https://m.sports.naver.com/esports/article/109/0005591543",
+          "pubDate": "2026-08-19T22:09:00+09:00"
+        },
+        {
+          "title": "수마 할퀸 거제·통영 복구 땀방울... 걸그룹 리센느도 5000만원 기부",
+          "link": "https://n.news.naver.com/mnews/article/023/0003993813?sid=102",
+          "pubDate": "2026-08-19T19:05:00+09:00"
+        },
+        {
+          "title": "[e스포츠 종합] 블리자드, '2026 오버워치 월드컵' 소식 외",
+          "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=60112",
+          "pubDate": "2026-08-19T18:10:00+09:00"
+        },
+        {
+          "title": "산업·금융계, 경남 수해 복구 지원에 발 벗고 나서",
+          "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=761762",
+          "pubDate": "2026-08-19T17:36:00+09:00"
+        },
+        {
+          "title": "올해 '경남 탑클래스' 사무소 프로모션 1위는?…밀양농협",
+          "link": "https://n.news.naver.com/mnews/article/003/0014136285?sid=102",
+          "pubDate": "2026-08-19T16:54:00+09:00"
+        },
+        {
+          "title": "플인 나선 KRX·NS·T1, 동반 PO 진출 가능할까 (VCT 퍼시픽 스테이지 2)",
+          "link": "https://m.sports.naver.com/esports/article/311/0002046884",
+          "pubDate": "2026-08-19T16:40:00+09:00"
+        },
+        {
+          "title": "“한국선 더 클 곳 없다”…미국 시장서 판 키우는 K푸드",
+          "link": "https://n.news.naver.com/mnews/article/009/0005722994?sid=101",
+          "pubDate": "2026-08-19T16:28:00+09:00"
+        },
+        {
+          "title": "대형마트 품은 식품사처럼...셀트리온, 유럽 유통망 직접 장악",
+          "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=316602",
+          "pubDate": "2026-08-19T15:50:00+09:00"
+        },
+        {
+          "title": "‘퍼시픽 저승사자’ 떠오른 샤퍼, VCT 퍼시픽 스테이지2 플레이-인 흥미...",
+          "link": "https://m.sports.naver.com/esports/article/468/0001260650",
+          "pubDate": "2026-08-19T15:11:00+09:00"
+        },
+        {
+          "title": "금융·유통·가전업계 ‘폭우 피해’ 지원 팔 걷었다…긴급자금 풀고 구...",
+          "link": "https://www.seoultimes.news/news/article.html?no=2000098935",
+          "pubDate": "2026-08-19T14:45:00+09:00"
+        },
+        {
+          "title": "[기획]경남 덮친 기록적 호우... 수해 복구 돕는 기업들의 '따뜻한 손길...",
+          "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=521386",
+          "pubDate": "2026-08-19T13:56:00+09:00"
+        },
+        {
+          "title": "퍼시픽 킬러 '샤퍼 이스포츠', '2026 VCT 퍼시픽 스테이지 2' 3R 진출",
+          "link": "https://gamefocus.co.kr/detail.php?number=178338",
+          "pubDate": "2026-08-19T13:54:00+09:00"
+        },
+        {
+          "title": "\"이기면 플레이오프\"⋯농심-T1, VCT 퍼시픽서 외나무다리 승부",
+          "link": "https://www.etoday.co.kr/news/view/2615937",
+          "pubDate": "2026-08-19T13:26:00+09:00"
+        },
+        {
+          "title": "농심 레드포스·키움 DRX·BNK 피어엑스, 이제는 더 이상 물러날 곳이 없...",
+          "link": "https://m.sports.naver.com/esports/article/311/0002046767",
+          "pubDate": "2026-08-19T12:49:00+09:00"
+        }
+      ],
+      "팔도": [
+        {
+          "title": "참치 해체쇼부터 유명 셰프 특식까지…‘경험’을 먹는 구내식당의 진화...",
+          "link": "https://n.news.naver.com/mnews/article/468/0001260776?sid=101",
+          "pubDate": "2026-08-20T07:01:00+09:00"
+        },
+        {
+          "title": "[미리보는 이데일리 신문]中 '반·차·바' 쓰나미… 韓경제 최후 보루마...",
+          "link": "https://n.news.naver.com/mnews/article/018/0006354424?sid=101",
+          "pubDate": "2026-08-19T21:24:00+09:00"
+        },
+        {
+          "title": "\"피지컬 AI로 면발 두께·성분 실시간 제어\"…팔도, 나주공장에 AI 자율...",
+          "link": "https://www.thepublic.kr/news/articleView.html?idxno=315436",
+          "pubDate": "2026-08-19T18:50:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장에 AI 자율 제조 시스템 도입…데이터 분석·생산설비 자...",
+          "link": "https://www.livebiz.today/news/articleView.html?idxno=204250",
+          "pubDate": "2026-08-19T18:42:00+09:00"
+        },
+        {
+          "title": "라면 생산공정 세팅도 '피지컬 AI'가...팔도, 나주공장 고도화",
+          "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=316614",
+          "pubDate": "2026-08-19T18:38:00+09:00"
+        },
+        {
+          "title": "[유통가 NOW] 농심 경남 호우 푸드팩 지원·하이트진로 미국 치맥 페스트...",
+          "link": "https://www.ekn.kr/web/view.php?key=20260819021374277",
+          "pubDate": "2026-08-19T18:18:00+09:00"
+        },
+        {
+          "title": "'사상 첫 해외매출 6,000억' 공장도 법인도 없이…베트남서 존재감 키우...",
+          "link": "https://www.insidevina.com/news/articleView.html?idxno=43836",
+          "pubDate": "2026-08-19T18:12:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장에 AI 자율제조 시스템 도입",
+          "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=662722",
+          "pubDate": "2026-08-19T18:10:00+09:00"
+        },
+        {
+          "title": "팔도비빔면·왕뚜껑 면발 AI로 뽑아낸다",
+          "link": "https://n.news.naver.com/mnews/article/014/0005563645?sid=101",
+          "pubDate": "2026-08-19T18:09:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장 라면 생산에 AI 기반 자동화 시스템 구축",
+          "link": "https://www.ngetnews.com/news/articleView.html?idxno=552547",
+          "pubDate": "2026-08-19T18:08:00+09:00"
+        },
+        {
+          "title": "엠아이큐브솔루션, 팔도 나주공장에 AI 자율제조 플랫폼 구축",
+          "link": "https://www.datanet.co.kr/news/articleView.html?idxno=213898",
+          "pubDate": "2026-08-19T18:00:00+09:00"
+        },
+        {
+          "title": "엠아이큐브솔루션, 팔도라면 공장에 피지컬 AI 구현",
+          "link": "https://www.thelec.kr/news/articleView.html?idxno=61136",
+          "pubDate": "2026-08-19T17:28:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장 AI 기반 자율제조 시스템 도입…생산 공정 고도화",
+          "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7179558",
+          "pubDate": "2026-08-19T17:18:00+09:00"
+        },
+        {
+          "title": "AI로 면발 두께까지 관리…팔도, 나주공장 제조 경쟁력 강화",
+          "link": "https://n.news.naver.com/mnews/article/468/0001260689?sid=101",
+          "pubDate": "2026-08-19T17:10:00+09:00"
+        },
+        {
+          "title": "[유통단신] 홈플러스, 재개장 첫 주말 매출 437억원 기록 外 무신사·G마...",
+          "link": "https://www.getnews.co.kr/news/articleView.html?idxno=878284",
+          "pubDate": "2026-08-19T17:04:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장에 'AI 자율제조 시스템' 도입… 생산 고도화 박차",
+          "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4024005",
+          "pubDate": "2026-08-19T17:00:00+09:00"
+        },
+        {
+          "title": "엠아이큐브솔루션, 팔도 라면 공장에 ‘피지컬 AI’ 구현",
+          "link": "https://byline.network/?p=9004111222615854",
+          "pubDate": "2026-08-19T16:44:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장 'AI 자율제조' 도입…라면 생산공정 고도화",
+          "link": "https://sports.hankooki.com/news/articleView.html?idxno=6938180",
+          "pubDate": "2026-08-19T16:42:00+09:00"
+        },
+        {
+          "title": "팔도, 전남 나주공장에 AI 자율제조 시스템 도입해 라면 생산공정 고도...",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=445104",
+          "pubDate": "2026-08-19T16:36:00+09:00"
+        },
+        {
+          "title": "보조 넘어 핵심 경쟁력으로...진화하는 유통업계 'AI 활용법'",
+          "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=105407",
+          "pubDate": "2026-08-19T16:30:00+09:00"
+        },
+        {
+          "title": "팔도, 라면 공장에도 '피지컬 AI'가…AI 제조 효율화로 수익성 제고",
+          "link": "http://www.dailypop.kr/news/articleView.html?idxno=101695",
+          "pubDate": "2026-08-19T16:26:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장에 AI 자율제조 도입…라면 생산 효율 높인다",
+          "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=608904",
+          "pubDate": "2026-08-19T16:12:00+09:00"
+        },
+        {
+          "title": "사무실에서 라면공장까지…AI, 산업 현장 속으로 깊숙이",
+          "link": "http://www.kdfnews.com/news/articleView.html?idxno=186775",
+          "pubDate": "2026-08-19T15:46:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장 'AI 자율제조'…생산 과정 오차 극소화 집중",
+          "link": "http://www.sisacast.kr/news/articleView.html?idxno=98938",
+          "pubDate": "2026-08-19T15:34:00+09:00"
+        },
+        {
+          "title": "엠아이큐브솔루션, 팔도 나주공장에 AI 기반 자율제조 플랫폼 구축",
+          "link": "https://www.dailysecu.com/news/articleView.html?idxno=208120",
+          "pubDate": "2026-08-19T15:30:00+09:00"
+        },
+        {
+          "title": "팔도, 나주공장에 AI 심었다…라면 생산 효율성 강화",
+          "link": "https://www.sentv.co.kr/article/view/sentv202608190148",
+          "pubDate": "2026-08-19T15:28:00+09:00"
+        }
+      ]
+    },
+    "disclosures": {
+      "오뚜기": [],
+      "삼양식품": [],
+      "농심": [],
+      "팔도": []
+    }
+  }
+}
